@@ -1,0 +1,2931 @@
+Let's make a game!
+	-Wall Destroyer
+	-by Tellurium
+	-created on 04/21/2014
+	-last updated on 12/27/2014
+	-version 2.3.4
+
+Settings :
+	-prices increase by 110%
+	-selling gives back 75%
+	-resources are hidden by default
+	-clickables are hidden by default
+	-buildings are hidden by default
+	-upgrades are hidden by default
+	-achievements are hidden by default
+	-show log
+	-custom stylesheet : https://raw.githubusercontent.com/aespinosapardo/Wall-destroyer/main/walldestroyer.css
+	-text color : black
+	-fonts : Kavoon
+	-boxes : main (resources, clickables); stats (achievements); store (upgrades, buildings)
+
+Resources :
+
+	*money
+        -named cash
+        -visible
+ 
+        *totalMoney
+        -named damage
+        -visible
+        -classed veryimportantresource
+ 
+        *bricks
+        -named brick|bricks
+        -visible
+        -classed veryimportantresource
+ 
+        *fourthWallMatter
+        -named fourth wall bricks
+        -classed veryimportantresource
+ 
+        *spaceBricks
+        -named space bricks
+        -classed importantresource
+        *timeBricks
+        -named time bricks
+        -classed importantresource
+        *endBricks
+        -named End bricks
+        -classed importantresource
+        *finalityBricks
+        -named Finality Bricks
+        -classed importantresource
+ 
+        *menuItem2
+        -displayed as ─────────────Stats─────────────
+        -classed importantresource
+        -visible
+ 
+        *totalBricks
+        -named total bricks
+        *handBricks
+        -named hand made bricks
+ 
+        *total4thWallMatter
+        -named total fourth wall bricks
+ 
+        *damageDivider1
+        -displayed as ────────────────────
+        -visible
+ 
+        *handDamage
+        -named hand damage
+ 
+        *puncherDamage
+        -named puncher damage
+        *clubberDamage
+        -named clubber damage
+        *swordsmanDamage
+        -named swordsman damage
+        *gunnerDamage
+        -named gunshooter damage
+        *grenadeDamage
+        -named grenademan damage
+        *wreckingBallDamage
+        -named wrecking ball damage
+        *bulldozerDamage
+        -named bulldozer damage
+        *airstrikeDamage
+        -named airstrike caller damage
+        *necromancerDamage
+        -named necromancer damage
+        *giantDamage
+        -named titan damage
+        *demonDamage
+        -named demon damnage
+        *compromiserDamage
+        -named reality compromiser damage
+        *lastDamage
+        -named Black obliterator damage
+ 
+        *damageDivider2
+        -displayed as ────────────────────
+        -visible
+ 
+        *timeUpgradeResource13
+        -named random bonus punching point|random bonus punching points
+        *timeUpgradeResource14
+        -named random bonus melee point|random bonus melee points
+        *timeUpgradeResource15
+        -named random bonus ranged point|random bonus ranged points
+        *timeUpgradeResource16
+        -named random bonus heavy point|random bonus heavy points
+        *timeUpgradeResource17
+        -named random bonus magic point|random bonus magic points
+        *timeUpgradeResource18
+        -named random bonus brick point|random bonus brick points
+		*timeUpgradeResource21
+        -named random bonus dream point|random bonus dream points
+ 
+        *divider3
+        -displayed as ────────────────────
+        -visible
+
+        *wallsDestroyed
+        -named wall destroyed|walls destroyed
+		*totalWalls
+		-named total walls destroyed
+ 
+        *building
+        -displayed as Buildings: %a
+        -visible
+ 
+        *timeSinceReset
+        -displayed as Last reset: %a minutes ago
+        *timePlayed
+        -displayed as Total minutes played: %a
+        -visible
+ 
+        *menuItem3
+        -displayed as ────────────Prestige────────────
+        -classed importantresource
+        -visible
+ 
+		*prePrestige
+		-named cosmic knowledge
+        *goldBricks
+        -named boss brick|boss bricks
+        *winBricks
+        -named pure brick
+ 
+        *divider4
+        -displayed as ────────────────────
+        -visible
+ 
+        *prestige
+        -named future knowledge capsules
+        *timesWon
+        -named boss point|boss points
+        *timesActuallyWon
+        -named true victory point|true victory points
+ 
+        *resetTimes
+        -named times reset
+        -displayed as Times reset: %a
+ 
+        *menuItem4
+        -displayed as ─────────────Info─────────────
+        -classed importantresource
+        -visible
+ 
+        *upgradeAmount
+        -displayed as Total upgrades in the game: 477
+        -visible
+        *achievementAmount
+        -displayed as Total achievements in the game: 194
+        -visible
+ 
+        *versionNumber
+        -visible
+        -displayed as Version 2.3.4
+ 
+	//abstract stuff
+
+	*wallRequirement
+	-abstract
+	-starts at 1
+
+	*bonusBossBrick
+	-abstract
+	*spaceBossBrick
+	-abstract
+	*timeBossBrick
+	-abstract
+	*endBossBrick
+	-abstract
+	*bonusBossPoint
+	-abstract
+	*spaceBossPoint
+	-abstract
+	*timeBossPoint
+	-abstract
+	*endBossPoint
+	-abstract
+ 
+        *timeUpgradeResource2
+        -abstract
+        *timeUpgradeResource3
+        -abstract
+        *timeUpgradeResource4
+        -abstract
+        *timeUpgradeResource5
+        -abstract
+        *timeUpgradeResource6
+        -abstract
+        *timeUpgradeResource7
+        -abstract
+        *timeUpgradeResource8
+        -abstract
+        *timeUpgradeResource9
+        -abstract
+        *timeUpgradeResource10
+        -abstract
+        *timeUpgradeResource11
+        -abstract
+        *timeUpgradeResource12
+        -abstract
+       
+        *timeUpgradeResource19
+        -abstract
+        *timeUpgradeResource20
+        -abstract
+ 
+        *nothing
+        -abstract
+ 
+        *never
+        -abstract
+        //just don't
+
+Clickables :
+	*hitWall
+	-gives 1 money
+	-gives 1 totalMoney
+	-gives 1 handDamage
+	-visible
+	-named Punch wall
+	-picture : http://i.imgur.com/108BtPH.png
+
+	*makeBricks
+	-gives 1 bricks
+	-gives 1 totalBricks
+	-gives 1 handBricks
+	-named Create Bricks
+	-picture : http://i.imgur.com/Tdh80P1.png
+
+	*reset
+	-converts prePrestige to prestige
+	-converts goldBricks to timesWon
+	-converts bonusBossBrick to bonusBossPoint
+	-converts spaceBossBrick to spaceBossPoint
+	-converts timeBossBrick to timeBossPoint
+	-converts endBossBrick to endBossPoint
+	-converts winBricks to timesActuallyWon
+	-gives 1 resetTimes
+	-locks destroyBigWall
+	-locks destroyHugeWall
+	-locks destroyMassiveWall
+	-locks destroyFinalWall
+	-locks destroyBonusWall
+	-locks destroyBonusWall2
+	-locks destroyBonusWall3
+	-locks destroyBonusWall4
+	-locks destroyBonusWall5
+	-locks destroyBonusWall6
+	-locks destroyBonusWall7
+	-locks destroyBonusWall8
+	-locks destroyBonusWall9
+	-locks destroyBonusWall10
+	-locks destroyBonusWall11
+	-locks destroyBonusWall12
+	-locks destroyBonusWall13
+	-locks destroyBonusWall14
+	-locks destroyBonusWall15
+	-locks destroyBonusWall16
+	-locks destroyBonusWall17
+	-locks destroyBonusWall18
+	-locks destroyBonusWall19
+	-locks destroyBonusWall20
+	-locks destroyBonusWall21
+	-locks destroyBonusWall22
+	-locks destroyBonusWall23
+	-locks destroyBonusWall24
+	-locks destroyBonusWall25
+	-locks destroyBonusWall26
+	-locks destroyBonusWall27
+	-locks destroyBonusWall28
+	-locks destroyBonusWall29
+	-locks destroyBonusWall30
+	-locks destroyBonusWall31
+	-locks destroyBonusWall32
+	-locks destroyBonusWall33
+	-locks destroyBonusWall34
+	-locks destroyBonusWall35
+	-locks destroyBonusWall36
+	-locks destroyBonusWall37
+	-locks destroyBonusWall38
+	-locks destroyBonusWall39
+	-locks destroyBonusWall40
+	-locks destroyBonusWall41
+	-locks destroyBonusWall42
+	-locks destroyBonusWall43
+	-locks destroyBonusWall44
+	-locks destroyBonusWall45
+	-unlocks destroyWall
+	-locks resetUnlock
+	-locks reset
+	-locks finalWallUnlock
+	-locks lastBuilding
+	-converts building to nothing
+	-converts puncher to nothing
+	-converts clubber to nothing
+	-converts swordsman to nothing
+	-converts gunner to nothing
+	-converts grenade to nothing
+	-converts wreckingBall to nothing
+	-converts bulldozer to nothing
+	-converts airstrike to nothing
+	-converts necromancer to nothing
+	-converts giant to nothing
+	-converts brickFactory to nothing
+	-converts demon to nothing
+	-converts compromiser to nothing
+	-converts lastBuilding to nothing
+	-converts money to nothing
+	-converts totalMoney to nothing
+	-converts handDamage to nothing
+	-converts puncherDamage to nothing
+	-converts clubberDamage to nothing
+	-converts swordsmanDamage to nothing
+	-converts gunnerDamage to nothing
+	-converts grenadeDamage to nothing
+	-converts wreckingBallDamage to nothing
+	-converts bulldozerDamage to nothing
+	-converts airstrikeDamage to nothing
+	-converts necromancerDamage to nothing
+	-converts giantDamage to nothing
+	-converts demonDamage to nothing
+	-converts compromiserDamage to nothing
+	-converts lastDamage to nothing
+	-converts bricks to nothing
+	-converts totalBricks to nothing
+	-converts handBricks to nothing
+	-converts fourthWallMatter to nothing
+	-converts total4thWallMatter to nothing
+	-converts spaceBricks to nothing
+	-converts timeBricks to nothing
+	-converts endBricks to nothing
+	-converts finalityBricks to nothing
+	-converts wallsDestroyed to totalWalls
+	-converts timeSinceReset to nothing
+	-converts destroyWall to nothing
+	-converts destroyBigWall to nothing
+	-converts destroyHugeWall to nothing
+	-converts destroyMassiveWall to nothing
+	-converts destroyFinalWall to nothing
+	-converts destroyBonusWall to nothing
+	-converts destroyBonusWall2 to nothing
+	-converts destroyBonusWall3 to nothing
+	-converts destroyBonusWall4 to nothing
+	-converts destroyBonusWall5 to nothing
+	-converts destroyBonusWall6 to nothing
+	-converts destroyBonusWall7 to nothing
+	-converts destroyBonusWall8 to nothing
+	-converts destroyBonusWall9 to nothing
+	-converts destroyBonusWall10 to nothing
+	-converts destroyBonusWall11 to nothing
+	-converts destroyBonusWall12 to nothing
+	-converts destroyBonusWall13 to nothing
+	-converts destroyBonusWall14 to nothing
+	-converts destroyBonusWall15 to nothing
+	-converts destroyBonusWall16 to nothing
+	-converts destroyBonusWall17 to nothing
+	-converts destroyBonusWall18 to nothing
+	-converts destroyBonusWall19 to nothing
+	-converts destroyBonusWall20 to nothing
+	-converts destroyBonusWall21 to nothing
+	-converts destroyBonusWall22 to nothing
+	-converts destroyBonusWall23 to nothing
+	-converts destroyBonusWall24 to nothing
+	-converts destroyBonusWall25 to nothing
+	-converts destroyBonusWall26 to nothing
+	-converts destroyBonusWall27 to nothing
+	-converts destroyBonusWall28 to nothing
+	-converts destroyBonusWall29 to nothing
+	-converts destroyBonusWall30 to nothing
+	-converts destroyBonusWall31 to nothing
+	-converts destroyBonusWall32 to nothing
+	-converts destroyBonusWall33 to nothing
+	-converts destroyBonusWall34 to nothing
+	-converts destroyBonusWall35 to nothing
+	-converts destroyBonusWall36 to nothing
+	-converts destroyBonusWall37 to nothing
+	-converts destroyBonusWall38 to nothing
+	-converts destroyBonusWall39 to nothing
+	-converts destroyBonusWall40 to nothing
+	-converts destroyBonusWall41 to nothing
+	-converts destroyBonusWall42 to nothing
+	-converts destroyBonusWall43 to nothing
+	-converts destroyBonusWall44 to nothing
+	-converts destroyBonusWall45 to nothing
+	-converts timeUpgradeProducer to nothing
+	-converts timeUpgradeProducer2 to nothing
+	-converts timeUpgradeProducer3 to nothing
+	-converts timeUpgradeResource2 to nothing
+	-converts timeUpgradeResource3 to nothing
+	-converts timeUpgradeResource4 to nothing
+	-converts timeUpgradeResource5 to nothing
+	-converts timeUpgradeResource6 to nothing
+	-converts timeUpgradeResource7 to nothing
+	-converts timeUpgradeResource8 to nothing
+	-converts timeUpgradeResource9 to nothing
+	-converts timeUpgradeResource10 to nothing
+	-converts timeUpgradeResource11 to nothing
+	-converts timeUpgradeResource12 to nothing
+	-converts timeUpgradeResource13 to nothing
+	-converts timeUpgradeResource14 to nothing
+	-converts timeUpgradeResource15 to nothing
+	-converts timeUpgradeResource16 to nothing
+	-converts timeUpgradeResource17 to nothing
+	-converts timeUpgradeResource18 to nothing
+	-converts timeUpgradeResource19 to nothing
+	-converts timeUpgradeResource20 to nothing
+	-converts timeUpgradeResource21 to nothing
+	-named Rewind time (Removes all buildings & resources, converts cosmic knowledge into prestige)
+	-says Time Rewound: Your cosmic knowledge has been converted into future knowledge capsules.
+	-says The Time Bear is coming.
+	
+	*damageConverter
+	-multiplies totalMoney 0.00000000000000000000000000000005%
+	-converts totalMoney to prePrestige
+	-named Convert all damage to cosmic knowledge
+
+Buildings :
+
+	*timeCounter
+	-gives 0.016666666666666666666666666666 timeSinceReset requiring 1 resetTimes
+	-gives 0.016666666666666666666666666666 timePlayed
+	-abstract
+	-starts at 1
+
+	*destroyWall
+	-"Destroy the wall and move on to a bigger one.<br>Gives <b>25</b> bricks.<br>Awards <b>250,000,000,000</b> cash.<br>Worth <b>1</b> cosmic knowledge."
+	-costs 1000000000000 totalMoney
+	-gives 250000000000 money when bought
+	-gives 25 bricks when bought
+	-gives 25 totalBricks when bought
+	-represents 1 wallsDestroyed
+	-represents 1 prePrestige
+	-named Destroy wall
+	-locks destroyWall
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks productionMultiplier1
+	-unlocks magicUnlock
+	-unlocks wallMultiplier
+	-unlocks destroyBigWall
+	-visible
+	*destroyBigWall
+	-"Destroy the big 2nd wall and move on to a bigger one.<br>Gives <b>100</b> bricks.<br>Awards <b>25,000,000,000,000</b> cash.<br>Worth <b>1</b> cosmic knowledge."
+	-costs 100000000000000 totalMoney
+	-gives 25000000000000 money when bought
+	-gives 100 bricks when bought
+	-gives 100 totalBricks when bought
+	-represents 1 wallsDestroyed
+	-represents 1 prePrestige
+	-named Destroy 2nd wall
+	-locks destroyBigWall
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks productionMultiplier2
+	-unlocks magicLevel2
+	-unlocks giantUnlock
+	-unlocks destroyHugeWall
+	*destroyHugeWall
+	-"Destroy the huge 3rd wall and move on to a bigger one.<br>Gives <b>10,000</b> bricks.<br>Awards <b>2,500,000,000,000,000</b> cash.<br>Worth <b>1</b> cosmic knowledge."
+	-costs 10000000000000000 totalMoney
+	-gives 2500000000000000 money when bought
+	-gives 10000 bricks when bought
+	-gives 10000 totalBricks when bought
+	-represents 1 wallsDestroyed
+	-represents 1 prePrestige
+	-named Destroy 3rd wall
+	-locks destroyHugeWall
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks productionMultiplier3
+	-unlocks magicLevel3
+	-unlocks destroyMassiveWall
+	*destroyMassiveWall
+	-"Destroy the massive 4th wall and move on to the final one.<br>Gives <b>250,000</b> bricks.<br>Awards <b>250,000,000,000,000,000</b> cash.<br>Worth <b>2</b> cosmic knowledge."
+	-costs 1000000000000000000 totalMoney
+	-gives 250000000000000000 money when bought
+	-gives 250000 bricks when bought
+	-gives 250000 totalBricks when bought
+	-represents 1 wallsDestroyed
+	-represents 2 prePrestige
+	-named Destroy 4th wall
+	-locks destroyMassiveWall
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks productionMultiplier4
+	-unlocks fourthWallLegend1
+	-unlocks fourthWallUnlock
+	-unlocks resetUnlock
+	-unlocks destroyFinalWall
+	*destroyFinalWall
+	-"Destroy the 5th and final wall.<br>Gives <b>10,000,000</b> bricks.<br>Awards <b>25,000,000,000,000,000,000</b> cash; <b>1</b> boss brick.<br>Worth <b>5</b> cosmic knowledge."
+	-costs 100000000000000000000 totalMoney
+	-gives 25000000000000000000 money when bought
+	-gives 10000000 bricks when bought
+	-gives 10000000 totalBricks when bought
+	-represents 1 goldBricks
+	-represents 1 wallsDestroyed
+	-represents 5 prePrestige
+	-named Destroy final wall
+	-locks destroyFinalWall
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall
+	-unlocks productionMultiplier5
+	-unlocks finalWallUnlock
+	*destroyBonusWall
+	-"<i>You win, but you can keep going anyway.</i><br> <br>Destroy bonus wall #9 and move on to the next.<br>Gives <b>100,000,000</b> bricks and <b>100 quintillion</b> cash.<br>Worth <b>5</b> cosmic knowledge."
+	-costs 200000000000000000000 totalMoney
+	-gives 100000000 bricks when bought
+	-gives 100000000 totalBricks when bought
+	-gives 100000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 5 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #9
+	-locks destroyBonusWall
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall2
+	*destroyBonusWall2
+	-"Destroy bonus wall #8 and move on to the next.<br>Gives <b>250,000,000</b> bricks and <b>200 quintillion</b> cash.<br>Worth <b>5</b> cosmic knowledge."
+	-costs 400000000000000000000 totalMoney
+	-gives 250000000 bricks when bought
+	-gives 250000000 totalBricks when bought
+	-gives 200000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 5 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #8
+	-locks destroyBonusWall2
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall3
+	*destroyBonusWall3
+	-"Destroy bonus wall #7 and move on to the next.<br>Gives <b>500,000,000</b> bricks and <b>400 quintillion</b> cash.<br>Worth <b>6</b> cosmic knowledge."
+	-costs 800000000000000000000 totalMoney
+	-gives 500000000 bricks when bought
+	-gives 500000000 totalBricks when bought
+	-gives 400000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 6 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #7
+	-locks destroyBonusWall3
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall4
+	*destroyBonusWall4
+	-"Destroy bonus wall #6 and move on to the next.<br>Gives <b>1,000,000,000</b> bricks and <b>800 quintillion</b> cash.<br>Worth <b>7</b> cosmic knowledge."
+	-costs 1600000000000000000000 totalMoney
+	-gives 1000000000 bricks when bought
+	-gives 1000000000 totalBricks when bought
+	-gives 800000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 7 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #6
+	-locks destroyBonusWall4
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall5
+	*destroyBonusWall5
+	-"Destroy bonus wall #5 and move on to the next.<br>Gives <b>2,000,000,000</b> bricks and <b>1.6 sextillion</b> cash.<br>Worth <b>8</b> cosmic knowledge."
+	-costs 3200000000000000000000 totalMoney
+	-gives 2000000000 bricks when bought
+	-gives 2000000000 totalBricks when bought
+	-gives 1600000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 8 prePrestige
+	-classed bonuswall
+	-unlocks wallDestroyer6
+	-unlocks productionMultiplierMagic
+	-locks destroyBonusWall5
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall6
+	*destroyBonusWall6
+	-"Destroy bonus wall #4 and move on to the next.<br>Gives <b>4,000,000,000</b> bricks and <b>3.2 sextillion</b> cash.<br>Worth <b>9</b> cosmic knowledge."
+	-costs 6400000000000000000000 totalMoney
+	-gives 4000000000 bricks when bought
+	-gives 4000000000 totalBricks when bought
+	-gives 3200000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 9 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #4
+	-locks destroyBonusWall6
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall7
+	*destroyBonusWall7
+	-"Destroy bonus wall #3 and move on to the next.<br>Gives <b>8,000,000,000</b> bricks and <b>6.4 sextillion</b> cash.<br>Worth <b>10</b> cosmic knowledge."
+	-costs 12800000000000000000000 totalMoney
+	-gives 8000000000 bricks when bought
+	-gives 8000000000 totalBricks when bought
+	-gives 6400000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 10 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #3
+	-locks destroyBonusWall7
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall8
+	*destroyBonusWall8
+	-"Destroy bonus wall #2 and move on to the next.<br>Gives <b>16,000,000,000</b> bricks and <b>12.8 sextillion</b> cash.<br>Worth <b>10</b> cosmic knowledge."
+	-costs 25600000000000000000000 totalMoney
+	-gives 16000000000 bricks when bought
+	-gives 16000000000 totalBricks when bought
+	-gives 12800000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 10 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #2
+	-locks destroyBonusWall8
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall9
+	*destroyBonusWall9
+	-"Destroy bonus wall #1 and move on to the boss.<br>Gives <b>32,000,000,000</b> bricks and <b>25.6 sextillion</b> cash.<br>Worth <b>10</b> cosmic knowledge."
+	-costs 51200000000000000000000 totalMoney
+	-gives 32000000000 bricks when bought
+	-gives 32000000000 totalBricks when bought
+	-gives 25600000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 10 prePrestige
+	-classed bonuswall
+	-named Destroy bonus wall #1
+	-locks destroyBonusWall9
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall10
+	*destroyBonusWall10
+	-"Destroy the boss bonus wall.<br>Gives <b>100 billion</b> bricks and <b>75 sextillion</b> cash; <b>1</b> boss brick.<br>Worth <b>20</b> cosmic knowledge."
+	-costs 150000000000000000000000 totalMoney
+	-gives 100000000000 bricks when bought
+	-gives 100000000000 totalBricks when bought
+	-gives 75000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 1 goldBricks
+	-represents 1 bonusBossBrick
+	-represents 20 prePrestige
+	-classed bonuswallboss
+	-unlocks wallDestroyer7
+	-unlocks productionMultiplierMagic2
+	-named Destroy boss bonus wall
+	-locks destroyBonusWall10
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall11
+	*destroyBonusWall11
+	-"<i>Turns out the bonus walls weren't the last thing we have to face, for the Ten Walls of Space lie beyond them.</i><br> <br>Destroy space wall #9 and move on to the next one.<br>Gives <b>200 billion</b> bricks and <b>100 sextillion</b> cash.<br>Gives <b>10</b> space bricks and unlocks <b>space research</b>.<br> <br>Note: space bricks cannot be kept through resets.<br>Worth <b>25</b> cosmic knowledge."
+	-costs 400000000000000000000000 totalMoney
+	-gives 200000000000 bricks when bought
+	-gives 200000000000 totalBricks when bought
+	-gives 100000000000000000000000 money when bought
+	-represents 10 spaceBricks
+	-unlocks spaceResearch
+	-represents 1 wallsDestroyed
+	-represents 25 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #9
+	-locks destroyBonusWall11
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall12
+	*destroyBonusWall12
+	-"Destroy space wall #8 and move on to the next one.<br>Gives <b>400 billion</b> bricks and <b>200 sextillion</b> cash.<br>Gives <b>10</b> space bricks.<br>Worth <b>25</b> cosmic knowledge."
+	-costs 800000000000000000000000 totalMoney
+	-gives 400000000000 bricks when bought
+	-gives 400000000000 totalBricks when bought
+	-gives 200000000000000000000000 money when bought
+	-represents 10 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 25 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #8
+	-locks destroyBonusWall12
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall13
+	*destroyBonusWall13
+	-"Destroy space wall #7 and move on to the next one.<br>Gives <b>800 billion</b> bricks and <b>400 sextillion</b> cash.<br>Gives <b>10</b> space bricks.<br>Worth <b>50</b> cosmic knowledge."
+	-costs 1600000000000000000000000 totalMoney
+	-gives 800000000000 bricks when bought
+	-gives 800000000000 totalBricks when bought
+	-gives 400000000000000000000000 money when bought
+	-represents 10 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 50 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #7
+	-locks destroyBonusWall13
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall14
+	*destroyBonusWall14
+	-"Destroy space wall #6 and move on to the next one.<br>Gives <b>1.6 trillion</b> bricks and <b>800 sextillion</b> cash.<br>Gives <b>10</b> space bricks.<br>Worth <b>50</b> cosmic knowledge."
+	-costs 3200000000000000000000000 totalMoney
+	-gives 1600000000000 bricks when bought
+	-gives 1600000000000 totalBricks when bought
+	-gives 800000000000000000000000 money when bought
+	-represents 10 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 50 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #6
+	-locks destroyBonusWall14
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall15
+	*destroyBonusWall15
+	-"Destroy space wall #5 and move on to the next one.<br>Gives <b>3.2 trillion</b> bricks and <b>1.6 septillion</b> cash.<br>Gives <b>10</b> space bricks.<br>Worth <b>75</b> cosmic knowledge."
+	-costs 6400000000000000000000000 totalMoney
+	-gives 3200000000000 bricks when bought
+	-gives 3200000000000 totalBricks when bought
+	-gives 1600000000000000000000000 money when bought
+	-represents 10 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 75 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #5
+	-unlocks productionMultiplierMagic3
+	-locks destroyBonusWall15
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall16
+	*destroyBonusWall16
+	-"Destroy space wall #4 and move on to the next one.<br>Gives <b>6.4 trillion</b> bricks and <b>3.2 septillion</b> cash.<br>Gives <b>10</b> space bricks.<br>Worth <b>75</b> cosmic knowledge."
+	-costs 12800000000000000000000000 totalMoney
+	-gives 6400000000000 bricks when bought
+	-gives 6400000000000 totalBricks when bought
+	-gives 3200000000000000000000000 money when bought
+	-represents 10 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 75 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #4
+	-locks destroyBonusWall16
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall17
+	*destroyBonusWall17
+	-"Destroy space wall #3 and move on to the next one.<br>Gives <b>12.8 trillion</b> bricks and <b>6.4 septillion</b> cash.<br>Gives <b>15</b> space bricks.<br>Worth <b>100</b> cosmic knowledge."
+	-costs 25600000000000000000000000 totalMoney
+	-gives 12800000000000 bricks when bought
+	-gives 12800000000000 totalBricks when bought
+	-gives 6400000000000000000000000 money when bought
+	-represents 15 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 100 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #3
+	-locks destroyBonusWall17
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall18
+	*destroyBonusWall18
+	-"Destroy space wall #2 and move on to the next one.<br>Gives <b>25 trillion</b> bricks and <b>12.8 septillion</b> cash.<br>Gives <b>15</b> space bricks.<br>Worth <b>100</b> cosmic knowledge."
+	-costs 51200000000000000000000000 totalMoney
+	-gives 25600000000000 bricks when bought
+	-gives 25600000000000 totalBricks when bought
+	-gives 12800000000000000000000000 money when bought
+	-represents 15 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 100 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #2
+	-locks destroyBonusWall18
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall19
+	*destroyBonusWall19
+	-"Destroy space wall #1 and move on to the boss.<br>Gives <b>50 trillion</b> bricks and <b>25 septillion</b> cash.<br>Gives <b>20</b> space bricks.<br>Worth <b>150</b> cosmic knowledge."
+	-costs 102400000000000000000000000 totalMoney
+	-gives 51200000000000 bricks when bought
+	-gives 51200000000000 totalBricks when bought
+	-gives 25600000000000000000000000 money when bought
+	-represents 20 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 150 prePrestige
+	-classed bonuswall
+	-named Destroy space wall #1
+	-locks destroyBonusWall19
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall20
+	*destroyBonusWall20
+	-"Destroy the boss space wall.<br>Gives <b>150 trillion</b> bricks and <b>75 septillion</b> cash.<br>Gives <b>40</b> space bricks; <b>1</b> boss brick.<br>Worth <b>250</b> cosmic knowledge."
+	-costs 300000000000000000000000000 totalMoney
+	-gives 150000000000000 bricks when bought
+	-gives 150000000000000 totalBricks when bought
+	-gives 75000000000000000000000000 money when bought
+	-represents 40 spaceBricks
+	-represents 1 wallsDestroyed
+	-represents 1 goldBricks
+	-represents 1 spaceBossBrick
+	-represents 250 prePrestige
+	-classed bonuswallboss
+	-unlocks wallDestroyer8
+	-unlocks productionMultiplier6
+	-named Destroy boss space wall
+	-locks destroyBonusWall20
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall21
+	*destroyBonusWall21
+	-"<i>"What lunatic built all these walls, anyway?!" ~Agent Carter<br>We now face the Ten Walls of Time.<br>These better be the last ones.</i><br> <br>Destroy time wall #9 and move on to the next.<br>Gives <b>400 trillion</b> bricks and <b>200 septillion</b> cash.<br>Gives <b>5</b> time bricks and unlocks the <b>time upgrades</b>.<br>Worth <b>250</b> cosmic knowledge.<br> <br>Note: time bricks also cannot be kept through resets."
+	-costs 800000000000000000000000000 totalMoney
+	-gives 400000000000000 bricks when bought
+	-gives 400000000000000 totalBricks when bought
+	-gives 200000000000000000000000000 money when bought
+	-represents 5 timeBricks
+	-represents 1 wallsDestroyed
+	-represents 250 prePrestige
+	-classed bonuswall
+	-unlocks timeUpgrade1
+	-builds 1 timeUpgradeProducer when bought
+	-named Destroy time wall #9
+	-locks destroyBonusWall21
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall22
+	*destroyBonusWall22
+	-"Destroy time wall #8 and move on to the next.<br>Gives <b>800 trillion</b> bricks and <b>400 septillion</b> cash.<br>Gives <b>5</b> time bricks.<br>Worth <b>250</b> cosmic knowledge."
+	-costs 1600000000000000000000000000 totalMoney
+	-gives 800000000000000 bricks when bought
+	-gives 800000000000000 totalBricks when bought
+	-gives 400000000000000000000000000 money when bought
+	-represents 5 timeBricks
+	-represents 1 wallsDestroyed
+	-represents 250 prePrestige
+	-classed bonuswall
+	-named Destroy time wall #8
+	-locks destroyBonusWall22
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall23
+	*destroyBonusWall23
+	-"Destroy time wall #7 and move on to the next.<br>Gives <b>1.6 quadrillion</b> bricks and <b>800 septillion</b> cash.<br>Gives <b>5</b> time bricks.<br>Worth <b>500</b> cosmic knowledge."
+	-costs 3200000000000000000000000000 totalMoney
+	-gives 1600000000000000 bricks when bought
+	-gives 1600000000000000 totalBricks when bought
+	-gives 800000000000000000000000000 money when bought
+	-represents 5 timeBricks
+	-represents 1 wallsDestroyed
+	-represents 500 prePrestige
+	-classed bonuswall
+	-named Destroy time wall #7
+	-locks destroyBonusWall23
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall24
+	*destroyBonusWall24
+	-"Destroy time wall #6 and move on to the next.<br>Gives <b>3.2 quadrillion</b> bricks and <b>1.6 octillion</b> cash.<br>Gives <b>5</b> time bricks.<br>Worth <b>500</b> cosmic knowledge."
+	-costs 6400000000000000000000000000 totalMoney
+	-gives 3200000000000000 bricks when bought
+	-gives 3200000000000000 totalBricks when bought
+	-gives 1600000000000000000000000000 money when bought
+	-represents 5 timeBricks
+	-represents 1 wallsDestroyed
+	-represents 500 prePrestige
+	-classed bonuswall
+	-named Destroy time wall #6
+	-locks destroyBonusWall24
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall25
+	*destroyBonusWall25
+	-"Destroy time wall #5 and move on to the next.<br>Gives <b>6.4 quadrillion</b> bricks and <b>3.2 octillion</b> cash.<br>Gives <b>6</b> time bricks.<br>Worth <b>750</b> cosmic knowledge."
+	-costs 12800000000000000000000000000 totalMoney
+	-gives 6400000000000000 bricks when bought
+	-gives 6400000000000000 totalBricks when bought
+	-gives 3200000000000000000000000000 money when bought
+	-represents 6 timeBricks
+	-represents 1 wallsDestroyed
+	-represents 750 prePrestige
+	-classed bonuswall
+	-unlocks productionMultiplierHell
+	-named Destroy time wall #5
+	-locks destroyBonusWall25
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall26
+	*destroyBonusWall26
+	-"Destroy time wall #4 and move on to the next.<br>Gives <b>12.8 quadrillion</b> bricks and <b>6.4 octillion</b> cash.<br>Gives <b>7</b> time bricks.<br>Worth <b>750</b> cosmic knowledge."
+	-costs 25600000000000000000000000000 totalMoney
+	-gives 12800000000000000 bricks when bought
+	-gives 12800000000000000 totalBricks when bought
+	-gives 6400000000000000000000000000 money when bought
+	-represents 7 timeBricks
+	-represents 1 wallsDestroyed
+	-represents 750 prePrestige
+	-classed bonuswall
+	-named Destroy time wall #4
+	-locks destroyBonusWall26
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall27
+	*destroyBonusWall27
+	-"Destroy time wall #3 and move on to the next.<br>Gives <b>25 quadrillion</b> bricks and <b>12.8 octillion</b> cash.<br>Gives <b>8</b> time bricks.<br>Worth <b>1,000</b> cosmic knowledge."
+	-costs 51200000000000000000000000000 totalMoney
+	-gives 25600000000000000 bricks when bought
+	-gives 25600000000000000 totalBricks when bought
+	-gives 12800000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 8 timeBricks
+	-represents 1000 prePrestige
+	-classed bonuswall
+	-named Destroy time wall #3
+	-locks destroyBonusWall27
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall28
+	*destroyBonusWall28
+	-"Destroy time wall #2 and move on to the next.<br>Gives <b>50 quadrillion</b> bricks and <b>25 octillion</b> cash.<br>Gives <b>9</b> time bricks.<br>Worth <b>1,000</b> cosmic knowledge."
+	-costs 102400000000000000000000000000 totalMoney
+	-gives 51200000000000000 bricks when bought
+	-gives 51200000000000000 totalBricks when bought
+	-gives 25600000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 9 timeBricks
+	-represents 1000 prePrestige
+	-classed bonuswall
+	-named Destroy time wall #2
+	-locks destroyBonusWall28
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall29
+	*destroyBonusWall29
+	-"Destroy time wall #1 and move on to the boss.<br>Gives <b>102 quadrillion</b> bricks and <b>51 octillion</b> cash.<br>Gives <b>10</b> time bricks.<br>Worth <b>1,500</b> cosmic knowledge."
+	-costs 204800000000000000000000000000 totalMoney
+	-gives 102400000000000000 bricks when bought
+	-gives 102400000000000000 totalBricks when bought
+	-gives 51200000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 10 timeBricks
+	-represents 1500 prePrestige
+	-classed bonuswall
+	-named Destroy time wall #1
+	-locks destroyBonusWall29
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall30
+	*destroyBonusWall30
+	-"Destroy the boss time wall.<br>Gives <b>250 quadrillion</b> bricks and <b>150 octillion</b> cash.<br>Gives <b>15</b> time bricks and <b>1</b> boss brick.<br>Worth <b>2,500</b> cosmic knowledge."
+	-costs 500000000000000000000000000000 totalMoney
+	-gives 250000000000000000 bricks when bought
+	-gives 250000000000000000 totalBricks when bought
+	-gives 150000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 1 goldBricks
+	-represents 15 timeBricks
+	-represents 1 timeBossBrick
+	-represents 2500 prePrestige
+	-classed bonuswallboss
+	-unlocks wallDestroyer9
+	-unlocks productionMultiplierHell2
+	-named Destroy boss time wall
+	-locks destroyBonusWall30
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall31
+	*destroyBonusWall31
+	-"<i>Nope. The Ten Walls of The End rise up over the rubble of time. At least these are clearly the last ones.</i><br> <br>Destroy End Wall #9 and move on to the next one.<br>Gives <b>800 quadrillion</b> bricks and <b>400 octillion</b> cash.<br>Gives <b>2</b> End bricks and <b>100</b> space bricks; unlocks the <b>Deep Space Upgrades</b> and <b>The End Scrolls</b>.<br>Worth <b>2,500</b> cosmic knowledge.<br> <br>Note: End bricks cannot be kept through resets either."
+	-costs 1600000000000000000000000000000 totalMoney
+	-gives 800000000000000000 bricks when bought
+	-gives 800000000000000000 totalBricks when bought
+	-gives 400000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 2 endBricks, 100 spaceBricks
+	-represents 2500 prePrestige
+	-classed bonuswall
+	-unlocks endStory
+	-unlocks deepSpaceResearch
+	-named Destroy End Wall #9
+	-locks destroyBonusWall31
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall32
+	*destroyBonusWall32
+	-"<i>We tried scanning the scrolls for age, and got "73 hours" from the scanner. The temple gave the same result. Probably had a broken scanner, especially since there are records of the temple dating back to 8,000 years ago.</i><br> <br>Destroy End Wall #8 and move on to the next one.<br>Gives <b>1.6 quintillion</b> bricks and <b>800 octillion</b> cash.<br>Gives <b>2</b> End bricks and <b>100</b> space bricks.<br>Worth <b>2,500</b> cosmic knowledge."
+	-costs 3200000000000000000000000000000 totalMoney
+	-gives 1600000000000000000 bricks when bought
+	-gives 1600000000000000000 totalBricks when bought
+	-gives 800000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 2 endBricks, 100 spaceBricks
+	-represents 2500 prePrestige
+	-classed bonuswall
+	-named Destroy End Wall #8
+	-locks destroyBonusWall32
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall33
+	*destroyBonusWall33
+	-"<i>Scanning shows that the scrolls are made of regular fabric, making it strange that they are perfectly preserved.</i><br> <br>Destroy End Wall #7 and move on to the next one.<br>Gives <b>3.2 quintillion</b> bricks and <b>1.6 nonillion</b> cash.<br>Gives <b>2</b> End bricks and <b>100</b> space bricks.<br>Worth <b>5,000</b> cosmic knowledge."
+	-costs 6400000000000000000000000000000 totalMoney
+	-gives 3200000000000000000 bricks when bought
+	-gives 3200000000000000000 totalBricks when bought
+	-gives 1600000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 2 endBricks, 100 spaceBricks
+	-represents 5000 prePrestige
+	-classed bonuswall
+	-named Destroy End Wall #7
+	-locks destroyBonusWall33
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall34
+	*destroyBonusWall34
+	-"<i>There's text on the outside of the temple that says "MIRRORAGE". Research suggests that it isn't even a real word.</i><br> <br>Destroy End Wall #6 and move on to the next one.<br>Gives <b>6.4 quintillion</b> bricks and <b>3.2 nonillion</b> cash.<br>Gives <b>2</b> End bricks and <b>100</b> space bricks.<br>Worth <b>5,000</b> cosmic knowledge."
+	-costs 12800000000000000000000000000000 totalMoney
+	-gives 6400000000000000000 bricks when bought
+	-gives 6400000000000000000 totalBricks when bought
+	-gives 3200000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 2 endBricks, 100 spaceBricks
+	-represents 5000 prePrestige
+	-classed bonuswall
+	-named Destroy End Wall #6
+	-locks destroyBonusWall34
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall35
+	*destroyBonusWall35
+	-"<i>Along with the scrolls, there were also sheets of paper with quotes written on them. We can list some of those here.</i><br> <br>Destroy End Wall #5 and move on to the next one.<br>Gives <b>12.8 quintillion</b> bricks and <b>6.4 nonillion</b> cash.<br>Gives <b>2</b> End bricks and <b>150</b> space bricks.<br>Worth <b>7,500</b> cosmic knowledge."
+	-costs 25600000000000000000000000000000 totalMoney
+	-gives 12800000000000000000 bricks when bought
+	-gives 12800000000000000000 totalBricks when bought
+	-gives 6400000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 2 endBricks, 150 spaceBricks
+	-represents 7500 prePrestige
+	-classed bonuswall
+	-unlocks productionMultiplierHell3
+	-named Destroy End Wall #5
+	-locks destroyBonusWall35
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall36
+	*destroyBonusWall36
+	-"<i>"Where's logic in this equation?" ~#8</i><br> <br>Destroy End Wall #4 and move on to the next one.<br>Gives <b>25 quintillion</b> bricks and <b>12.8 nonillion</b> cash.<br>Gives <b>2</b> End bricks and <b>150</b> space bricks.<br>Worth <b>10,000</b> cosmic knowledge."
+	-costs 51200000000000000000000000000000 totalMoney
+	-gives 25600000000000000000 bricks when bought
+	-gives 25600000000000000000 totalBricks when bought
+	-gives 12800000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 3 endBricks, 150 spaceBricks
+	-represents 10000 prePrestige
+	-classed bonuswall
+	-named Destroy End Wall #4
+	-locks destroyBonusWall36
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall37
+	*destroyBonusWall37
+	-"<i>"If you think about it, everything is unfinished. Nothing is truly left without questions." ~Lord Reaefsek</i><br> <br>Destroy End Wall #3 and move on to the next one.<br>Gives <b>51 quintillion</b> bricks and <b>25 nonillion</b> cash.<br>Gives <b>3</b> End bricks and <b>200</b> space bricks.<br>Worth <b>10,000</b> cosmic knowledge."
+	-costs 102400000000000000000000000000000 totalMoney
+	-gives 51200000000000000000 bricks when bought
+	-gives 51200000000000000000 totalBricks when bought
+	-gives 25600000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 3 endBricks, 200 spaceBricks
+	-represents 10000 prePrestige
+	-classed bonuswall
+	-named Destroy End Wall #3
+	-locks destroyBonusWall37
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall38
+	*destroyBonusWall38
+	-"<i>"It's pretty clear The King is insane, but what are we gonna do, fight him?" ~#14</i><br> <br>Destroy End Wall #2 and move on to the next one.<br>Gives <b>102 quintillion</b> bricks and <b>51 nonillion</b> cash.<br>Gives <b>3</b> End bricks and <b>200</b> space bricks.<br>Worth <b>10,000</b> cosmic knowledge."
+	-costs 204800000000000000000000000000000 totalMoney
+	-gives 102400000000000000000 bricks when bought
+	-gives 102400000000000000000 totalBricks when bought
+	-gives 51200000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 4 endBricks, 200 spaceBricks
+	-represents 10000 prePrestige
+	-classed bonuswall
+	-named Destroy End Wall #2
+	-locks destroyBonusWall38
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall39
+	*destroyBonusWall39
+	-"<i>"What, his face broke? I can fix that." ~#10</i><br> <br>Destroy End Wall #1 and move on to the boss.<br>Gives <b>204 quintillion</b> bricks and <b>102 nonillion</b> cash.<br>Gives <b>4</b> End bricks and <b>250</b> space bricks.<br>Worth <b>12,500</b> cosmic knowledge."
+	-costs 409600000000000000000000000000000 totalMoney
+	-gives 204800000000000000000 bricks when bought
+	-gives 204800000000000000000 totalBricks when bought
+	-gives 102400000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 4 endBricks, 250 spaceBricks
+	-represents 12500 prePrestige
+	-classed bonuswall
+	-named Destroy End Wall #1
+	-locks destroyBonusWall39
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall40
+	*destroyBonusWall40
+	-"<i>"There goes a rapture." ~#17</i><br> <br>Destroy the Boss End Wall.<br>Gives <b>500 quintillion</b> bricks and <b>250 nonillion</b> cash.<br>Gives <b>5</b> End bricks, <b>500</b> space bricks and <b>1</b> boss brick.<br>Worth <b>25,000</b> cosmic knowledge."
+	-costs 1000000000000000000000000000000000 totalMoney
+	-gives 500000000000000000000 bricks when bought
+	-gives 500000000000000000000 totalBricks when bought
+	-gives 250000000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 1 goldBricks
+	-represents 9 endBricks, 500 spaceBricks
+	-represents 1 endBossBrick
+	-represents 25000 prePrestige
+	-classed bonuswallboss
+	-unlocks wallDestroyer10
+	-unlocks productionMultiplier7
+	-named Destroy Boss End Wall
+	-locks destroyBonusWall40
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall41
+	*destroyBonusWall41
+	-"<i>Should've seen this coming.</i><br> <br>Destroy Finality Wall Delta and move on to the next.<br>Gives <b>2 sextillion</b> bricks and <b>1 decillion</b> cash.<br>Gives <b>1</b> Finality Brick and <b>50</b> time bricks; unlocks the <b>deep time upgrades</b> (which unlock randomly over time, again) and <b>The Finality Scrolls</b>.<br>Worth <b>25,000</b> cosmic knowledge.<br> <br>Note: You guessed it, Finality Bricks cannot be kept through resets."
+	-costs 4000000000000000000000000000000000 totalMoney
+	-gives 2000000000000000000000 bricks when bought
+	-gives 2000000000000000000000 totalBricks when bought
+	-gives 1000000000000000000000000000000000 money when bought
+	-builds 1 timeUpgradeProducer2 when bought
+	-represents 1 wallsDestroyed
+	-represents 1 finalityBricks, 50 timeBricks
+	-represents 25000 prePrestige
+	-classed bonuswall
+	-unlocks finalityUnlock
+	-named Destroy Finality Wall Delta
+	-locks destroyBonusWall41
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall42
+	*destroyBonusWall42
+	-"Destroy Finality Wall Gamma and move on to the next.<br>Gives <b>8 sextillion</b> bricks and <b>4 decillion</b> cash.<br>Gives <b>1</b> Finality Brick and <b>75</b> time bricks.<br>Worth <b>50,000</b> cosmic knowledge."
+	-costs 16000000000000000000000000000000000 totalMoney
+	-gives 8000000000000000000000 bricks when bought
+	-gives 8000000000000000000000 totalBricks when bought
+	-gives 4000000000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 1 finalityBricks, 75 timeBricks
+	-represents 50000 prePrestige
+	-classed bonuswall
+	-named Destroy Finality Wall Gamma
+	-locks destroyBonusWall42
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall43
+	*destroyBonusWall43
+	-"Destroy Finality Wall Beta and move on to the next.<br>Gives <b>32 sextillion</b> bricks and <b>16 decillion</b> cash.<br>Gives <b>1</b> Finality Brick and <b>125</b> time bricks.<br>Worth <b>75,000</b> cosmic knowledge."
+	-costs 64000000000000000000000000000000000 totalMoney
+	-gives 32000000000000000000000 bricks when bought
+	-gives 32000000000000000000000 totalBricks when bought
+	-gives 16000000000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 1 finalityBricks, 125 timeBricks
+	-represents 75000 prePrestige
+	-classed bonuswall
+	-named Destroy Finality Wall Beta
+	-locks destroyBonusWall43
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall44
+	*destroyBonusWall44
+	-"Destroy Finality Wall Alpha and move on to the final boss.<br>Gives <b>128 sextillion</b> bricks and <b>64 decillion</b> cash.<br>Gives <b>2</b> Finality Bricks and <b>175</b> time bricks.<br>Worth <b>150,000</b> cosmic knowledge."
+	-costs 256000000000000000000000000000000000 totalMoney
+	-gives 128000000000000000000000 bricks when bought
+	-gives 128000000000000000000000 totalBricks when bought
+	-gives 64000000000000000000000000000000000 money when bought
+	-represents 1 wallsDestroyed
+	-represents 2 finalityBricks, 175 timeBricks
+	-represents 150000 prePrestige
+	-classed bonuswall
+	-named Destroy Finality Wall Alpha
+	-locks destroyBonusWall44
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-unlocks destroyBonusWall45
+	*destroyBonusWall45
+	-"Destroy the Boss Finality Wall, and claim true victory.<br>Gives <b>2 septillion</b> bricks and <b>1 undecillion</b> cash.<br>Gives <b>1</b> boss brick, <b>4</b> Finality Bricks, <b>40</b> End bricks, <b>500</b> time bricks, and <b>5,000</b> space bricks.<br>Worth <b>600,000</b> cosmic knowledge.<br>Unlocks any time upgrades that were not already unlocked."
+	-costs 5000000000000000000000000000000000000 totalMoney
+	-gives 2000000000000000000000000 bricks when bought
+	-gives 2000000000000000000000000 totalBricks when bought
+	-gives 1000000000000000000000000000000000000 money when bought
+	-builds 1 timeUpgradeProducer3 requiring 1 timesActuallyWon when bought
+	-represents 1 wallsDestroyed
+	-represents 1 winBricks, 1 goldBricks
+	-represents 4 finalityBricks, 40 endBricks, 500 timeBricks, 5000 spaceBricks
+	-represents 600000 prePrestige
+	-classed bonuswallboss
+	-unlocks wallDestroyer11
+	-unlocks productionMultiplierBlack
+	-unlocks timeUpgrade2
+	-unlocks timeUpgrade3
+	-unlocks timeUpgrade4
+	-unlocks timeUpgrade5
+	-unlocks timeUpgrade6
+	-unlocks timeUpgrade7
+	-unlocks timeUpgrade8
+	-unlocks timeUpgrade9
+	-unlocks timeUpgrade10
+	-unlocks timeUpgrade11
+	-unlocks timeUpgrade12
+	-unlocks timeUpgrade13
+	-unlocks timeUpgrade14
+	-unlocks timeUpgrade15
+	-unlocks timeUpgrade16
+	-unlocks timeUpgrade17
+	-unlocks timeUpgrade18
+	-unlocks timeUpgrade19
+	-unlocks timeUpgrade20
+	-named Destroy Boss Finality Wall
+	-costs 1 wallRequirement
+	-gives 1 wallRequirement when bought
+	-locks destroyBonusWall45
+
+	*timeUpgradeProducer
+	-abstract
+	-gives 1 timeUpgradeResource2 0.005% of the time
+	-gives 1 timeUpgradeResource3 0.005% of the time
+	-gives 1 timeUpgradeResource4 0.005% of the time
+	-gives 1 timeUpgradeResource5 0.005% of the time
+	-gives 1 timeUpgradeResource6 0.005% of the time
+	-gives 1 timeUpgradeResource7 0.005% of the time
+	-gives 1 timeUpgradeResource8 0.005% of the time
+	-gives 1 timeUpgradeResource9 0.005% of the time
+	-gives 1 timeUpgradeResource10 0.005% of the time
+	-gives 1 timeUpgradeResource11 0.005% of the time
+	-gives 1 timeUpgradeResource12 0.005% of the time
+	*timeUpgradeProducer2
+	-abstract
+	-gives 1 timeUpgradeResource13 0.005% of the time
+	-gives 1 timeUpgradeResource14 0.005% of the time
+	-gives 1 timeUpgradeResource15 0.005% of the time
+	-gives 1 timeUpgradeResource16 0.005% of the time
+	-gives 1 timeUpgradeResource17 0.005% of the time
+	-gives 1 timeUpgradeResource18 0.005% of the time
+	-gives 1 timeUpgradeResource19 0.005% of the time
+	-gives 1 timeUpgradeResource20 0.005% of the time
+	*timeUpgradeProducer3
+	-abstract
+	-gives 1 timeUpgradeResource21 0.005% of the time
+
+	*puncher
+    -"Melee building<br>Does <b>0.1</b> base damage.<br><i>Punches the wall for you.</i> 
+	-costs 20 money
+	-gives 0.1 money
+	-gives 0.1 totalMoney
+	-gives 0.1 puncherDamage
+	-named Puncher|Punchers
+	-represents 1 building
+	-visible
+
+	*clubber
+	-"Melee building<br>Does <b>0.5</b> base damage.<br><i>Not to be confused with the other kind of clubbing.</i>"
+	-costs 150 money
+	-gives 0.5 money
+	-gives 0.5 totalMoney
+	-gives 0.5 clubberDamage
+	-named Clubber|Clubbers
+	-represents 1 building
+	-visible
+
+	*swordsman
+	-"Melee building<br>Does <b>2.5</b> base damage.<br><i>Some question the use of swords on a brick wall. Those guys are lame.</i>"
+	-costs 1100 money
+	-gives 2.5 money
+	-gives 2.5 totalMoney
+	-gives 2.5 swordsmanDamage
+	-named Swordsman|Swordsmen
+	-represents 1 building
+	-visible
+
+    *gunner
+	-"Ranged building<br>Does <b>30</b> base damage.<br><i>Shoots his gun.</i>"
+	-costs 16000 money
+	-gives 30 money
+	-gives 30 totalMoney
+	-gives 30 gunnerDamage
+	-named Gunshooter|Gunshooters
+	-represents 1 building
+	-visible
+
+	*grenade
+	-"Ranged building<br>Does <b>500</b> base damage.<br><i>A man with grenades. I am a master of descriptions.</i>"
+	-costs 400000 money
+	-gives 500 money
+	-gives 500 totalMoney
+	-gives 500 grenadeDamage
+	-named Grenademan|Grenademen
+	-represents 1 building
+	-visible
+
+	*wreckingBall
+	-"Heavy duty building<br>Does <b>7,000</b> base damage.<br><i>Something actually meant for destroying walls.</i>"
+	-costs 8000000 money
+	-gives 7000 money
+	-gives 7000 totalMoney
+	-gives 7000 wreckingBallDamage
+	-named Wrecking Ball|Wrecking Balls
+	-represents 1 building
+	-visible
+
+	*bulldozer
+	-"Heavy duty building<br>Does <b>80,000</b> base damage.<br><i>Rams the wall. So good.</i>"
+	-costs 120000000 money
+	-gives 80000 money
+	-gives 80000 totalMoney
+	-gives 80000 bulldozerDamage
+	-named Bulldozer|Bulldozers
+	-represents 1 building
+	-visible
+
+	*airstrike
+	-"Heavy duty building<br>Does <b>2,500,000</b> base damage.<br><i>You know, the guy that calls airstrikes.</i>"
+	-costs 5000000000 money
+	-gives 2500000 money
+	-gives 2500000 totalMoney
+	-gives 2500000 airstrikeDamage
+	-named Airstrike Caller|Airstrike Callers
+	-represents 1 building
+	-visible
+
+	*necromancer
+	-"Magic building<br>Does <b>33,333,333</b> base damage.<br><i>Raises dead wizards to destroy the wall with their dark magic. Requires bricks.</i>"
+	-costs 66666666666 money, 1 bricks
+	-gives 33333333 money
+	-gives 33333333 totalMoney
+	-gives 33333333 necromancerDamage
+	-named Necromancer|Necromancers
+	-represents 1 building
+	
+	*giant
+	-"Magic building<br>Does <b>250,000,000</b> base damage.<br><i>The prime inhabitants of the Old World, back from the dead. They smash the wall with their giant fists.</i>"
+	-costs 888888888888 money
+	-gives 250000000 money
+	-gives 250000000 totalMoney
+	-gives 250000000 giantDamage
+	-named Titan|Titans
+	-represents 1 building
+
+	*demon
+	-"Magic building<br>Does <b>3,666,666,666</b> base damnage.<br><i>Defiles the wall with the darkest magic of all.</i>"
+	-costs 666 bricks
+	-gives 3666666666 money
+	-gives 3666666666 totalMoney
+	-gives 3666666666 demonDamage
+	-named Demon|Demons
+	-represents 1 building
+
+	*compromiser
+	-"Dream building<br>Does <b>40,000,000,000</b> base damage.<br>Gives <b>0.1</b> fourth wall bricks.<br><i>Enters reality code and removes the wall from existence.</i>"
+	-costs 100101001011010 money
+	-gives 40000000000 money
+	-gives 40000000000 totalMoney
+	-gives 40000000000 compromiserDamage
+	-gives 0.1 fourthWallMatter
+	-gives 0.1 total4thWallMatter
+	-named Reality Compromiser|Reality Compromisers
+	-represents 1 building
+
+	*lastBuilding
+	-"Dream building<br>Does <b>1,000,000,000,000,000</b> base damage.<br><i>Robots covered in The Black. They're really cool, so no one questions mixing the most dangerous & evil thing ever with cold, unfeeling robots.</i>"
+	-costs 52000000000000000000 money, 52000 fourthWallMatter
+	-gives 1000000000000000 money
+	-gives 1000000000000000 totalMoney
+	-gives 1000000000000000 lastDamage
+	-named Black Obliterator|Black Obliterators
+	-represents 1 building
+
+	*brickFactory
+	-"Special building<br>Creates <b>0.05</b> base bricks.<br><i>Creates artificial bricks with dark magic. The wizards will never know.</i>"
+	-costs 16666666666666 money
+	-gives 0.05 bricks
+	-gives 0.05 totalBricks
+	-named Brick Factory|Brick Factories
+	-unlocks at 3 wallsDestroyed
+	-represents 1 building
+
+Upgrades :
+	*win
+	-"Everything is <b>25%</b> more efficient if you have the pure brick. Everything is <b>20%</b> more efficient per true victory point.</b><br><i>It's time to go home.</i>"
+	-requires 800 puncher, 800 clubber, 700 swordsman, 700 gunner, 700 grenade, 700 wreckingBall, 600 bulldozer, 600 airstrike, 600 necromancer, 500 giant, 500 demon, 500 compromiser, 350 lastBuilding, 500 brickFactory
+	-requires 1e+35 handDamage, 5000000 prestige
+	-unlocks at 1 winBricks
+	-named The End
+	-unlocks won
+	-multiplies efficiency of hitWall by 25% per winBricks
+	-multiplies efficiency of puncher by 25% per winBricks
+	-multiplies efficiency of clubber by 25% per winBricks
+	-multiplies efficiency of swordsman by 25% per winBricks
+	-multiplies efficiency of gunner by 25% per winBricks
+	-multiplies efficiency of grenade by 25% per winBricks
+	-multiplies efficiency of wreckingBall by 25% per winBricks
+	-multiplies efficiency of bulldozer by 25% per winBricks
+	-multiplies efficiency of airstrike by 25% per winBricks
+	-multiplies efficiency of necromancer by 25% per winBricks
+	-multiplies efficiency of giant by 25% per winBricks
+	-multiplies efficiency of demon by 25% per winBricks
+	-multiplies efficiency of compromiser by 25% per winBricks
+	-multiplies efficiency of lastBuilding by 25% per winBricks
+	-multiplies efficiency of brickFactory by 25% per winBricks
+	-multiplies efficiency of makeBricks by 25% per winBricks
+	-multiplies efficiency of hitWall by 20% per timesActuallyWon
+	-multiplies efficiency of puncher by 20% per timesActuallyWon
+	-multiplies efficiency of clubber by 20% per timesActuallyWon
+	-multiplies efficiency of swordsman by 20% per timesActuallyWon
+	-multiplies efficiency of gunner by 20% per timesActuallyWon
+	-multiplies efficiency of grenade by 20% per timesActuallyWon
+	-multiplies efficiency of wreckingBall by 20% per timesActuallyWon
+	-multiplies efficiency of bulldozer by 20% per timesActuallyWon
+	-multiplies efficiency of airstrike by 20% per timesActuallyWon
+	-multiplies efficiency of necromancer by 20% per timesActuallyWon
+	-multiplies efficiency of giant by 20% per timesActuallyWon
+	-multiplies efficiency of demon by 20% per timesActuallyWon
+	-multiplies efficiency of compromiser by 20% per timesActuallyWon
+	-multiplies efficiency of lastBuilding by 20% per timesActuallyWon
+	-multiplies efficiency of brickFactory by 20% per timesActuallyWon
+	-multiplies efficiency of makeBricks by 20% per timesActuallyWon
+	-picture : http://i.imgur.com/nLIn2uJ.png
+
+	*magicUnlock
+	-"We need bricks to trade with the underground wizards for their secrets. Bricks are their most valuable resource."
+	-costs 1 bricks
+	-named Magic Mining
+	-picture : http://i.imgur.com/eEoeiRj.png
+	-unlocks necromancer
+	-unlocks puncherUpgradeMagic1
+	-unlocks clubberUpgradeMagic
+	-unlocks swordsmanUpgradeMagic
+	-unlocks gunnerUpgradeMagic
+	*magicLevel2
+	-"Necromancers do <b>twice</b> as much damage.<br>Titans do <b>50%</b> more damage.<br>Unlocks the <b>brick factory</b>.<br><i>The wizards are saying we shouldn't go this deep, but we found these cool dark magic tablets.</i>"
+	-costs 66666666666666 money, 6 bricks
+	-named Deep Magic Mining
+	-multiplies efficiency of necromancer by 200%
+	-multiplies efficiency of giant by 150%
+	-unlocks brickFactory
+	-picture : http://i.imgur.com/3C1bIXe.png
+	*magicLevel3
+	-"Summons <b>demons</b>.<br>Necromancers and titans do <b>50%</b> more damage.<br><i>We need to mine into hell with dark magic so we can make a deal with the devil to destroy the wall. Everything about this plan is excellent.</i>"
+	-costs 6666666666666666 money, 66666 bricks
+	-named Dark Magic Mining
+	-multiplies efficiency of necromancer by 150%
+	-multiplies efficiency of giant by 150%
+	-unlocks demon
+	-picture : http://i.imgur.com/Z4p4G7T.png
+	*giantUnlock
+	-"The wizards are willing to raise titans from the dead to help destroy the walls. This is a good idea."
+	-costs 16 bricks
+	-named Summon Titans
+	-picture : http://i.imgur.com/YYCAyYr.png
+	-unlocks giant
+	-unlocks magicLevel2
+	*fourthWallUnlock
+	-"Unlocks <b>reality compromisers</b>.<br>Unlocks the <b>4th wall upgrade tier</b>.<br>We have discovered with the breaking of the 4th wall that we are all inside a stupid idle game. Not even a <i>real</i> game! But we can use this knowledge to our advantage..."
+	-costs 404400040440040440 money, 4004404 bricks
+	-named Reality Research 
+	-unlocks compromiser
+	-unlocks puncher4thWallUpgrade
+	-unlocks clubber4thWallUpgrade
+	-unlocks swordsman4thWallUpgrade
+	-unlocks gunner4thWallUpgrade
+	-unlocks grenade4thWallUpgrade
+	-unlocks wreckingBall4thWallUpgrade
+	-unlocks bulldozer4thWallUpgrade
+	-unlocks airstrike4thWallUpgrade
+	-picture : http://i.imgur.com/RH7gkh2.png
+
+	*resetUnlock
+	-"Unlocks the <b>reset button</b>, which converts walls destroyed into future knowledge capsules.<br><i>We can rewind time and keep our knowledge.</i>"
+	-costs 1000 fourthWallMatter
+	-unlocks reset
+	-named Time Rewinders
+	-picture : http://i.imgur.com/T2QFa2N.png
+	
+	*damageConverterUnlock
+	-"Unlocks the ability to convert damage to cosmic knowledge, at the rate of 2 decillion to 1.<br><i>The hackers decided there was an easier way to go about this.<br> <br>"hacking??? lol overnab" ~1337 sn1p3r #4</i>"
+	-costs 1e37 money
+	-unlocks at 1 winBricks
+	-unlocks damageConverter
+	-named Prestige Hacker
+	-picture : http://i.imgur.com/bkEkr5p.png
+
+	*finalWallUnlock
+	-"Unlocks <b>Black Obliterators</b>.<br><i>We have discovered a substance in [REDACTED] that holds more power than anything we have ever encountered. We call it The Black because it is pitch black.</i>"
+	-costs 42000000000000000000 money
+	-unlocks lastBuilding
+	-named Black Research
+	-picture : http://i.imgur.com/Pewjyq5.png
+
+	*spaceResearch
+	-"Unlocks the <b>space upgrades</b>.<br><i>We suspect the space bricks contain many secrets of the universe. Because come on, like we'd find some totally useless bricks?</i>"
+	-costs 200000000000000000000000 money, 2000000000 fourthWallMatter
+	-named Space Brick Research
+	-unlocks spaceUpgrade1
+	-unlocks spaceUpgrade2
+	-unlocks spaceUpgrade3
+	-unlocks spaceUpgrade4
+	-unlocks spaceUpgrade5
+	-unlocks spaceUpgrade6
+	-unlocks spaceUpgrade7
+	-unlocks spaceUpgrade8
+	-unlocks spaceUpgrade9
+	-unlocks spaceUpgrade10
+	-picture : http://i.imgur.com/EfaZXcy.png
+	
+	*spaceUpgrade1
+	-"Hand punches do <b>35%</b> more damage.<br><i>A strange reality code find: everything has an 'importance level'. If we turn it up on you, your punches do more damage and you are luckier.</i>"
+	-costs 10 spaceBricks
+	-multiplies efficiency of hitWall by 135%
+	-named Importance Adjustments
+	-picture : http://i.imgur.com/X9d1a8M.png
+	*spaceUpgrade2
+	-"Melee buildings do <b>four times</b> as much damage.<br><i>"Exploiting glitches in reality code is fun, and only has a </i>small<i> chance to break the world!" ~RC Project Leader</i>"
+	-costs 10 spaceBricks
+	-multiplies efficiency of puncher by 400%
+	-multiplies efficiency of clubber by 400%
+	-multiplies efficiency of swordsman by 400%
+	-named Sharpness Paradox
+	-picture : http://i.imgur.com/4v6vBD4.png
+	*spaceUpgrade3
+	-"Ranged buildings do <b>four times</b> more damage.<br><i>"Seeing things get bigger as they move looks waaaaay trippy." ~Grenademan Project Leader, possibly under the influence</i>"
+	-costs 10 spaceBricks
+	-multiplies efficiency of gunner by 400%
+	-multiplies efficiency of grenade by 400%
+	-named Size Adjusting Scripts
+	-picture : http://i.imgur.com/jDy7JIQ.png
+	*spaceUpgrade4
+	-"Bulldozers do <b>three times</b> as much damage.<br><i>"We figured out a way to make something keep moving at the same speed even if something is in front of it. I suggest we don't use it because it sounds reeeeaally dangerous." ~Hacker #8</i>"
+	-costs 10 spaceBricks
+	-multiplies efficiency of bulldozer by 300%
+	-named Forced Movement
+	-picture : http://i.imgur.com/ZBMMz7s.png
+	*spaceUpgrade5
+	-"Wrecking balls do <b>four times</b> as much damage.<br>Airstrike callers do <b>twice</b> as much damage.<br><i>"Let's cut out the middleman and just use our new knowledge and the compromisers to totally wreck the walls with balls and strikes!" ~Hacker #37</i>"
+	-costs 10 spaceBricks
+	-multiplies efficiency of wreckingBall by 400%
+	-multiplies efficiency of airstrike by 200%
+	-named Extreme Telekinetics
+	-picture : http://i.imgur.com/WyJyF4U.png
+	*spaceUpgrade6
+	-"Everything is <b>8%</b> more efficient.<br><i>Using our new knowledge of space with the compromisers, pretty much everything can be made better. Mostly consists of making things bigger, of course.</i>"
+	-costs 15 spaceBricks
+	-multiplies efficiency of hitWall by 108%
+	-multiplies efficiency of puncher by 108%
+	-multiplies efficiency of clubber by 108%
+	-multiplies efficiency of swordsman by 108%
+	-multiplies efficiency of gunner by 108%
+	-multiplies efficiency of grenade by 108%
+	-multiplies efficiency of wreckingBall by 108%
+	-multiplies efficiency of bulldozer by 108%
+	-multiplies efficiency of airstrike by 108%
+	-multiplies efficiency of necromancer by 108%
+	-multiplies efficiency of giant by 108%
+	-multiplies efficiency of demon by 108%
+	-multiplies efficiency of compromiser by 108%
+	-multiplies efficiency of lastBuilding by 108%
+	-multiplies efficiency of brickFactory by 108%
+	-multiplies efficiency of makeBricks by 108%
+	-named Spacial Improvements
+	-picture : http://i.imgur.com/sLWYgGF.png
+	*spaceUpgrade7
+	-"Magic buildings do <b>25%</b> more damage.<br><i>"In the far stars and nebulae lies vast magical power... Is it possible you could access some of it?" ~A wizard, when asked how we could improve their magic with space powers</i>"
+	-costs 15 spaceBricks
+	-multiplies efficiency of necromancer by 125%
+	-multiplies efficiency of giant by 125%
+	-multiplies efficiency of demon by 125%
+	-named Cosmic Magic
+	-picture : http://i.imgur.com/irxNpBW.png
+	*spaceUpgrade8
+	-"Reality compromisers are <b>50%</b> more efficient.<br><i>"Thanks to the space bricks, we can remove many areas of code from the Don't Even Try It's Incomprehensible list!" ~Hacker #10</i>"
+	-costs 15 spaceBricks
+	-multiplies efficiency of compromiser by 150%
+	-named Space-Related Formulas
+	-picture : http://i.imgur.com/LMj6ofZ.png
+	*spaceUpgrade9
+	-"Brick factories and manual bricks are <b>5%</b> more efficient <b>per wall destroyed</b>.<br><i>The power within the walls' bricks is worth an incredible amount of fake bricks, and the space bricks are the secret to pulling that power out and putting it to use!</i>"
+	-costs 20 spaceBricks
+	-multiplies efficiency of brickFactory by 5% per wallsDestroyed
+	-multiplies efficiency of makeBricks by 5% per wallsDestroyed
+	-named Morphing Tech
+	-picture : http://i.imgur.com/2bgyPye.png
+	*spaceUpgrade10
+	-"Everything is <b>0.005%</b> more efficient <b>per building owned</b>.<br><i>Weight is tied to its associated objects, so all we have to do is dislodge the anchor and move it over to more important stuff. Wall destroying stuff.</i>"
+	-costs 35 spaceBricks
+	-multiplies efficiency of hitWall by 0.005% per building
+	-multiplies efficiency of puncher by 0.005% per building
+	-multiplies efficiency of clubber by 0.005% per building
+	-multiplies efficiency of swordsman by 0.005% per building
+	-multiplies efficiency of gunner by 0.005% per building
+	-multiplies efficiency of grenade by 0.005% per building
+	-multiplies efficiency of wreckingBall by 0.005% per building
+	-multiplies efficiency of bulldozer by 0.005% per building
+	-multiplies efficiency of airstrike by 0.005% per building
+	-multiplies efficiency of necromancer by 0.005% per building
+	-multiplies efficiency of giant by 0.005% per building
+	-multiplies efficiency of demon by 0.005% per building
+	-multiplies efficiency of compromiser by 0.005% per building
+	-multiplies efficiency of lastBuilding by 0.005% per building
+	-multiplies efficiency of brickFactory by 0.005% per building
+	-multiplies efficiency of makeBricks by 0.005% per building
+	-named Weight Relocation
+	-picture : http://i.imgur.com/frFPqZn.png
+
+	*deepSpaceResearch
+	-"Unlocks the <b>deep space upgrades</b>.<br><i>"I can't even hold all these cosmic revelations!" ~Agent Johnson</i>"
+	-costs 500000000000000000000000000000 money, 50000000000000000 fourthWallMatter
+	-named Deep Space Research
+	-unlocks spaceUpgrade11
+	-unlocks spaceUpgrade12
+	-unlocks spaceUpgrade13
+	-unlocks spaceUpgrade14
+	-unlocks spaceUpgrade15
+	-unlocks spaceUpgrade16
+	-unlocks spaceUpgrade17
+	-unlocks spaceUpgrade18
+	-picture : http://i.imgur.com/onMV7rU.png
+	*spaceUpgrade11
+	-"Melee buildings do <b>0.5%</b> more damage <b>per dream building</b>.<br><i>"Using more theoretical assumptions and dubious workarounds than any upgrade before, it is truly an RUC accomplishment." ~Agent Brown in the DCT proposal</i>"
+	-costs 100 spaceBricks
+	-multiplies efficiency of puncher by 0.5% per compromiser
+	-multiplies efficiency of clubber by 0.5% per compromiser
+	-multiplies efficiency of swordsman by 0.5% per compromiser
+	-multiplies efficiency of puncher by 0.5% per lastBuilding
+	-multiplies efficiency of clubber by 0.5% per lastBuilding
+	-multiplies efficiency of swordsman by 0.5% per lastBuilding
+	-named Dreams Come True
+	-picture : http://i.imgur.com/uILIfAo.png
+	*spaceUpgrade12
+	-"Ranged buildings do <b>1.5%</b> more damage <b>per brick factory</b>.<br><i>A lost project we managed to recover. We don't know how it works, and our only documentation on it is the planned flavor text:<br>"Why does this require deep space knowledge, you ask? Well, [DATA CORRUPTED]"</i>"
+	-costs 100 spaceBricks
+	-multiplies efficiency of gunner by 1.5% per brickFactory
+	-multiplies efficiency of grenade by 1.5% per brickFactory
+	-named Brickshot
+	-picture : http://i.imgur.com/kUbZIrt.png
+	*spaceUpgrade13
+	-"Wrecking balls do <b>0.1%</b> more damage <b>per building owned</b>.<br><i>Give or take.</i>"
+	-costs 100 spaceBricks
+	-multiplies efficiency of wreckingBall by 0.1% per building
+	-named The Force Of A Thousand Balls
+	-picture : http://i.imgur.com/nESKwg1.png
+	*spaceUpgrade14
+	-"Melee, ranged, and heavy duty buildings do <b>0.3%</b> more damage <b>per reality compromiser</b>.<br><i>"Gravity? Physics? This is laaame." ~RC Project Leader in the FFR proposal</i>"
+	-costs 150 spaceBricks
+	-multiplies efficiency of puncher by 0.3% per compromiser
+	-multiplies efficiency of clubber by 0.3% per compromiser
+	-multiplies efficiency of swordsman by 0.3% per compromiser
+	-multiplies efficiency of gunner by 0.3% per compromiser
+	-multiplies efficiency of grenade by 0.3% per compromiser
+	-multiplies efficiency of wreckingBall by 0.3% per compromiser
+	-multiplies efficiency of bulldozer by 0.3% per compromiser
+	-multiplies efficiency of airstrike by 0.3% per compromiser
+	-named Freedom From Reality
+	-picture : http://i.imgur.com/ctiz8NH.png
+	*spaceUpgrade15
+	-"Brick factories are <b>25%</b> more efficient <b>per boss brick</b>.<br>Manual brick creation is <b>50%</b> more efficient <b>per boss brick</b>.<br><i>Of course the boss bricks are worth a ton of normal bricks. And of course it takes deep space understanding to know how to draw out that worth. This is just how these things work.</i>"
+	-costs 250 spaceBricks
+	-multiplies efficiency of brickFactory by 25% per goldBricks
+	-multiplies efficiency of makeBricks by 50% per goldBricks
+	-named Boss Power
+	-picture : http://i.imgur.com/9mZst2L.png
+	*spaceUpgrade16
+	-"Hand punches do <b>0.03%</b> more damage <b>per melee building</b>.<br><i>"Ladies and gentlemen, we are gathered here today because we have finally done it. It took the ability to manipulate reality, space and time, but we have finally combined the club knuckles with the sword knuckles." ~RUC CEO at the grand SCK presentation.</i>"
+	-costs 250 spaceBricks
+	-multiplies efficiency of hitWall by 0.03% per puncher
+	-multiplies efficiency of hitWall by 0.03% per clubber
+	-multiplies efficiency of hitWall by 0.03% per swordsman
+	-named Sword Club Knuckles
+	-picture : http://i.imgur.com/Wf0lExe.png
+	*spaceUpgrade17
+	-"Black obliterators do <b>50%</b> more damage.<br><i>With our new deep knowledge of space, we can understand a bit better just how many craps The Black gives. The answer: literally none. It has even been theorized that The Black could give negative craps.</i>"
+	-costs 350 spaceBricks
+	-multiplies efficiency of lastBuilding by 150%
+	-named Improved Handling
+	-picture : http://i.imgur.com/ascYTTw.png
+	*spaceUpgrade18
+	-"Everything is <b>0.004%</b> more efficient <b>per building owned</b>.<br><i>Yeah, there are totally alternate realities. The code for them is very complex, but luckily deep space knowledge gets us just far enough to be able to steal force and density from them.</i>"
+	-costs 700 spaceBricks
+	-multiplies efficiency of hitWall by 0.004% per building
+	-multiplies efficiency of puncher by 0.004% per building
+	-multiplies efficiency of clubber by 0.004% per building
+	-multiplies efficiency of swordsman by 0.004% per building
+	-multiplies efficiency of gunner by 0.004% per building
+	-multiplies efficiency of grenade by 0.004% per building
+	-multiplies efficiency of wreckingBall by 0.004% per building
+	-multiplies efficiency of bulldozer by 0.004% per building
+	-multiplies efficiency of airstrike by 0.004% per building
+	-multiplies efficiency of necromancer by 0.004% per building
+	-multiplies efficiency of giant by 0.004% per building
+	-multiplies efficiency of demon by 0.004% per building
+	-multiplies efficiency of compromiser by 0.004% per building
+	-multiplies efficiency of lastBuilding by 0.004% per building
+	-multiplies efficiency of brickFactory by 0.004% per building
+	-multiplies efficiency of makeBricks by 0.004% per building
+	-named Alternate Reality Forcestacking
+	-picture : http://i.imgur.com/uFTByUI.png
+
+	*timeUpgrade1
+	-"Everything is <b>10%</b> more efficient.<br><i>The other time upgrades unlock randomly over time. You'll just have to wait. Possibly a long time, if you are not a lucker.</i>"
+	-costs 5 timeBricks
+	-named Chronological Improvements
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-multiplies efficiency of brickFactory by 110%
+	-multiplies efficiency of makeBricks by 110%
+	-picture : http://i.imgur.com/U84N3WY.png
+	*timeUpgrade2
+	-"Hand punches do <b>45%</b> more damage.<br>Punchers do <b>50%</b> more damage.<br><i>Punching, more than other things, takes well to ridiculous speeds.</i>"
+	-costs 5 timeBricks
+	-unlocks at 1 timeUpgradeResource2
+	-named Hyperspeed Punching
+	-multiplies efficiency of hitWall by 145%
+	-multiplies efficiency of puncher by 150%
+	-picture : http://i.imgur.com/wCv7CDx.png
+	*timeUpgrade3
+	-"Melee buildings do <b>0.4%</b> more damage <b>per magic building</b>.<br><i>Magic is like other useful forces, only magic.</i>"
+	-costs 5 timeBricks
+	-unlocks at 1 timeUpgradeResource3
+	-multiplies efficiency of puncher by 0.4% per necromancer
+	-multiplies efficiency of clubber by 0.4% per necromancer
+	-multiplies efficiency of swordsman by 0.4% per necromancer
+	-multiplies efficiency of puncher by 0.4% per giant
+	-multiplies efficiency of clubber by 0.4% per giant
+	-multiplies efficiency of swordsman by 0.4% per giant
+	-multiplies efficiency of puncher by 0.4% per demon
+	-multiplies efficiency of clubber by 0.4% per demon
+	-multiplies efficiency of swordsman by 0.4% per demon
+	-named Past Magic Residue
+	-picture : http://i.imgur.com/O5SW3NU.png
+	*timeUpgrade4
+	-"Gunners do <b>4%</b> more damage <b>per reality compromiser</b>.<br><i>"We've always wanted to shoot hundreds of bullets with each shot, but never had the bullets for it." ~Gunner Project Leader in the ATB proposal</i>"
+	-costs 5 timeBricks
+	-unlocks at 1 timeUpgradeResource4
+	-multiplies efficiency of gunner by 4% per compromiser
+	-named All The Bullets
+	-picture : http://i.imgur.com/HKL2QpN.png
+	*timeUpgrade5
+	-"Grenademen do <b>1.5%</b> more damage <b>per wrecking ball</b>.<br><i>"I approve any proposal with a really boss name, of course." ~RUC CEO on the proposal process</i>"
+	-costs 5 timeBricks
+	-unlocks at 1 timeUpgradeResource5
+	-multiplies efficiency of grenade by 1.5% per wreckingBall
+	-named Time-Wrecking Grenades
+	-picture : http://i.imgur.com/5kTlqj8.png
+	*timeUpgrade6
+	-"Heavy buildings do <b>0.1%</b> more damage <b>per 10 minutes since reset</b>.<br><i>There is much wisdom to be found in the art of smashing things.</i>"
+	-costs 5 timeBricks
+	-unlocks at 1 timeUpgradeResource6
+	-multiplies efficiency of wreckingBall by 0.01 per timeSinceReset
+	-multiplies efficiency of bulldozer by 0.01 per timeSinceReset
+	-multiplies efficiency of airstrike by 0.01 per timeSinceReset
+	-named Wisdom From Age
+	-picture : http://i.imgur.com/bnJorFQ.png
+	*timeUpgrade7
+	-"Necromancers do <b>twice</b> as much damage.<br><i>Makes for stronger and less zombie-like zombies, which the necromancers are saying totally cramps their style. (Too bad, we're in charge)</i>"
+	-unlocks at 1 timeUpgradeResource7
+	-costs 5 timeBricks
+	-multiplies efficiency of necromancer by 200%
+	-named Biological Clock Rewinders
+	-picture : http://i.imgur.com/w5BGKUZ.png
+	*timeUpgrade8
+	-"Titans do <b>twice</b> as much damage.<br><i>Giant things move too slow. The time bricks can help!</i>"
+	-unlocks at 1 timeUpgradeResource8
+	-costs 5 timeBricks
+	-multiplies efficiency of giant by 200%
+	-named Fast Forward
+	-picture : http://i.imgur.com/vG0W03L.png
+	*timeUpgrade9
+	-"Demons do <b>twice</b> as much damage.<br><i>Past demons are less tech-savvy, but better with their evil magic. The present demons have fun showing them all the new trolling methods they've invented.<br>EDIT: we may have made another mistake.</i>"
+	-costs 5 timeBricks
+	-unlocks at 1 timeUpgradeResource9
+	-multiplies efficiency of demon by 200%
+	-named Demons From The Past
+	-picture : http://i.imgur.com/cESUAsi.png
+	*timeUpgrade10
+	-"Dream buildings are <b>10%</b> more efficient <b>per boss brick</b>.<br><i>"If we explore into the past, each boss brick has a ton of reality secrets stored in it. It's like whoever constructed the walls is trying to help us destroy them!" ~RC Project Leader</i>"
+	-costs 10 timeBricks
+	-unlocks at 1 timeUpgradeResource10
+	-multiplies efficiency of compromiser by 10% per goldBricks
+	-multiplies efficiency of lastBuilding by 10% per goldBricks
+	-named Boss Research
+	-picture : http://i.imgur.com/n6j2v6z.png
+	*timeUpgrade11
+	-"Brick factories and hand bricks produce <b>twice</b> as many bricks.</b><br><i>This plan may have its critics, but it's totally safe to assume we will be making thousands of times more bricks in the future and the amount we're taking will be nothing. Yes. This is a good plan.</i>"
+	-costs 10 timeBricks
+	-unlocks at 1 timeUpgradeResource11
+	-multiplies efficiency of brickFactory by 200%
+	-multiplies efficiency of makeBricks by 200%
+	-named Future Bricks
+	-picture : http://i.imgur.com/cxmIElt.png
+	*timeUpgrade12
+	-"Everything is <b>0.2%</b> more efficient <b>per 100 minutes since reset.</b><br><i>Had to convince the 1337 sn1p3rs that this is a timestacking technique and not the act of spying on them to reveal what they're doing to the enemy team.</i>"
+	-costs 10 timeBricks
+	-unlocks at 1 timeUpgradeResource12
+	-multiplies efficiency of hitWall by 0.002% per timeSinceReset
+	-multiplies efficiency of puncher by 0.002% per timeSinceReset
+	-multiplies efficiency of clubber by 0.002% per timeSinceReset
+	-multiplies efficiency of swordsman by 0.002% per timeSinceReset
+	-multiplies efficiency of gunner by 0.002% per timeSinceReset
+	-multiplies efficiency of grenade by 0.002% per timeSinceReset
+	-multiplies efficiency of wreckingBall by 0.002% per timeSinceReset
+	-multiplies efficiency of bulldozer by 0.002% per timeSinceReset
+	-multiplies efficiency of airstrike by 0.002% per timeSinceReset
+	-multiplies efficiency of necromancer by 0.002% per timeSinceReset
+	-multiplies efficiency of giant by 0.002% per timeSinceReset
+	-multiplies efficiency of demon by 0.002% per timeSinceReset
+	-multiplies efficiency of compromiser by 0.002% per timeSinceReset
+	-multiplies efficiency of lastBuilding by 0.002% per timeSinceReset
+	-multiplies efficiency of brickFactory by 0.002% per timeSinceReset
+	-multiplies efficiency of makeBricks by 0.002% per timeSinceReset
+	-named Ghosting
+	-picture : http://i.imgur.com/M4T5Aol.png
+
+	*timeUpgrade13
+	-"Hand punches do <b>30%</b> more damage <b>per random bonus punching point</b>, which the demons have a 1/20,000 chance of giving you every second, no matter how many you have.<br><i>The demons revealed that they stole some time bricks and gathered much more knowledge than we did. So of course they find a way to annoy us with it: they give us really useful knowledge, but only at random times, usually when inconvenient.</i>"
+	-costs 75 timeBricks
+	-unlocks at 1 timeUpgradeResource13
+	-multiplies efficiency of hitWall by 30% per timeUpgradeResource13
+	-named Random Punching Bonus
+	-picture : http://i.imgur.com/6WTh07Z.png
+	*timeUpgrade14
+	-"Melee buildings do <b>40%</b> more damage <b>per random bonus melee point</b>, which the demons have a 1/20,000 chance of giving you every second, no matter how many you have.<br><i>"The demons are kind of like Agent Johnson, only even bigger assholes." ~Agent Connor</i>"
+	-costs 50 timeBricks
+	-unlocks at 1 timeUpgradeResource14
+	-multiplies efficiency of puncher by 40% per timeUpgradeResource14
+	-multiplies efficiency of clubber by 40% per timeUpgradeResource14
+	-multiplies efficiency of swordsman by 40% per timeUpgradeResource14
+	-named Random Melee Bonus
+	-picture : http://i.imgur.com/EOAFOpK.png
+	*timeUpgrade15
+	-"Ranged buildings do <b>40%</b> more damage <b>per random bonus ranged point</b>, which the demons have a 1/20,000 chance of giving you every second, no matter how many you have.<br><i>"I'm playing Cookie Clicker, and I get an elder frenzy, when a demon appears and tapes a piece of paper with deep time information written on it over my screen. It's semi-transparent and I actually see a reindeer come on screen during the elder frenzy, when the demon takes my mouse and spends all my cookies on farms." ~Grenademan Project Leader</i>"
+	-costs 50 timeBricks
+	-unlocks at 1 timeUpgradeResource15
+	-multiplies efficiency of gunner by 40% per timeUpgradeResource15
+	-multiplies efficiency of grenade by 40% per timeUpgradeResource15
+	-named Random Ranged Bonus
+	-picture : http://i.imgur.com/C0FN0FI.png
+	*timeUpgrade16
+	-"Heavy duty buildings do <b>35%</b> more damage <b>per random bonus heavy point</b>, which the demons have a 1/20,000 chance of giving you every second, no matter how many you have.<br><i>"I was watching TV, and a demon jumps through the window and starts dishing out advanced time knowledge! I had to scramble for a pen with my greasy chip fingers because the assholes never repeat it. He then told me which characters die that season, took my chips, and left." ~Agent Carter<br>"I am so done." ~Head of Demon Relations</i>"
+	-costs 75 timeBricks
+	-unlocks at 1 timeUpgradeResource16
+	-multiplies efficiency of wreckingBall by 35% per timeUpgradeResource16
+	-multiplies efficiency of bulldozer by 35% per timeUpgradeResource16
+	-multiplies efficiency of airstrike by 35% per timeUpgradeResource16
+	-named Random Heavy Duty Bonus
+	-picture : http://i.imgur.com/kzkBClB.png
+	*timeUpgrade17
+	-"Magic buildings do <b>25%</b> more damage <b>per random bonus magic point</b>, which the demons have a 1/20,000 chance of giving you every second, no matter how many you have.<br><i>"I need to step up my game. The demons are freaking MASTERS." ~Agent Johnson</i>"
+	-costs 100 timeBricks
+	-unlocks at 1 timeUpgradeResource17
+	-multiplies efficiency of necromancer by 25% per timeUpgradeResource17
+	-multiplies efficiency of giant by 25% per timeUpgradeResource17
+	-multiplies efficiency of demon by 25% per timeUpgradeResource17
+	-named Random Magic Bonus
+	-picture : http://i.imgur.com/y3XeTNm.png
+	*timeUpgrade18
+	-"Brick factories and manual brick creation are <b>30%</b> more efficient <b>per random bonus brick point</b>, which the demons have a 1/20,000 chance of giving you every second, no matter how many you have.<br><i>"The worst part is that you can't complain that much, because they are giving you super useful info. Even if they tie a tape that repeats it only once to a brick and throw it through your window while you're taking a shower." ~Brick Factory Project Leader</i>"
+	-costs 150 timeBricks
+	-unlocks at 1 timeUpgradeResource18
+	-multiplies efficiency of brickFactory by 30% per timeUpgradeResource18
+	-multiplies efficiency of makeBricks by 30% per timeUpgradeResource18
+	-named Random Brick Bonus
+	-picture : http://i.imgur.com/VKCIKOq.png
+	*timeUpgrade19
+	-"Magic & dream buildings are <b>0.7%</b> more efficient <b>per wall destroyed</b>.<br><i>The walls have an incredible amount of power inside them, and we finally have a way to use it to our advantage. They sure don't seem to have any reason for having so much power inside them, as they just sit there doing nothing.</i>"
+	-costs 200 timeBricks
+	-unlocks at 1 timeUpgradeResource19
+	-multiplies efficiency of necromancer by 0.7% per wallsDestroyed
+	-multiplies efficiency of giant by 0.7% per wallsDestroyed
+	-multiplies efficiency of demon by 0.7% per wallsDestroyed
+	-multiplies efficiency of compromiser by 0.7% per wallsDestroyed
+	-multiplies efficiency of lastBuilding by 0.7% per wallsDestroyed
+	-named Temporal Power Extraction
+	-picture : http://i.imgur.com/QV85c3k.png
+	*timeUpgrade20
+	-"Everything is <b>0.2%</b> more efficient <b>per 100 minutes since reset.</b><br><i>"The deep time theories involved in this project are pretty dense. HAHAHAHAHAHA" ~Agent Johnson's only comment on the DTS proposal</i>"
+	-costs 300 timeBricks
+	-unlocks at 1 timeUpgradeResource20
+	-multiplies efficiency of hitWall by 0.002% per timeSinceReset
+	-multiplies efficiency of puncher by 0.002% per timeSinceReset
+	-multiplies efficiency of clubber by 0.002% per timeSinceReset
+	-multiplies efficiency of swordsman by 0.002% per timeSinceReset
+	-multiplies efficiency of gunner by 0.002% per timeSinceReset
+	-multiplies efficiency of grenade by 0.002% per timeSinceReset
+	-multiplies efficiency of wreckingBall by 0.002% per timeSinceReset
+	-multiplies efficiency of bulldozer by 0.002% per timeSinceReset
+	-multiplies efficiency of airstrike by 0.002% per timeSinceReset
+	-multiplies efficiency of necromancer by 0.002% per timeSinceReset
+	-multiplies efficiency of giant by 0.002% per timeSinceReset
+	-multiplies efficiency of demon by 0.002% per timeSinceReset
+	-multiplies efficiency of compromiser by 0.002% per timeSinceReset
+	-multiplies efficiency of lastBuilding by 0.002% per timeSinceReset
+	-multiplies efficiency of brickFactory by 0.002% per timeSinceReset
+	-multiplies efficiency of makeBricks by 0.002% per timeSinceReset
+	-named Density Timestacking
+	-picture : http://i.imgur.com/Q6oG66i.png
+	*timeUpgrade21
+	-"Dream buildings are <b>20%</b> more efficient <b>per random bonus dream point</b>, which the demons have a 1/20,000 chance of giving you every second, no matter how many you have.<br><i>"Okay, so there was a bonus to giving them The Amsora. IT WASN'T FUCKING WORTH IT." ~RC Project Leader, seconded by basically everyone<br> <br>"The demons are hilarious, you guys all need to chill." ~Agent Johnson<br>"My problem with the demons is this: They are horrible, garnished with awful, with a Satan on top." ~Agent Connor</i>"
+	-costs 1000 timeBricks, 1.23456789e37 money 
+	-unlocks at 1 timeUpgradeResource21, 1 timesActuallyWon
+	-multiplies efficiency of compromiser by 20% per timeUpgradeResource21
+	-multiplies efficiency of lastBuilding by 20% per timeUpgradeResource21
+	-named Random Dream Bonus
+	-picture : http://i.imgur.com/zq20OLd.png
+	
+	*specialBrickBonus
+	-"Everything is <b>0.001%</b> more efficient per <b>space brick</b> and <b>0.007%</b> per <b>time brick</b>.<br><i>"I can barely contain my excitement." ~Agent Johnson<br>"There's something about the massive concentration of sarcasm in your voice that makes me think otherwise." ~Agent Lawrence<br>"Look, I just want more interesting upgrades, okay?" ~Agent Johnson</i>"
+	-costs 8e24 bricks
+	-unlocks at 1 timesActuallyWon, 1 winBricks
+	-multiplies efficiency of hitWall by 0.001% per spaceBricks
+	-multiplies efficiency of puncher by 0.001% per spaceBricks
+	-multiplies efficiency of clubber by 0.001% per spaceBricks
+	-multiplies efficiency of swordsman by 0.001% per spaceBricks
+	-multiplies efficiency of gunner by 0.001% per spaceBricks
+	-multiplies efficiency of grenade by 0.001% per spaceBricks
+	-multiplies efficiency of wreckingBall by 0.001% per spaceBricks
+	-multiplies efficiency of bulldozer by 0.001% per spaceBricks
+	-multiplies efficiency of airstrike by 0.001% per spaceBricks
+	-multiplies efficiency of necromancer by 0.001% per spaceBricks
+	-multiplies efficiency of giant by 0.001% per spaceBricks
+	-multiplies efficiency of demon by 0.001% per spaceBricks
+	-multiplies efficiency of compromiser by 0.001% per spaceBricks
+	-multiplies efficiency of brickFactory by 0.001% per spaceBricks
+	-multiplies efficiency of lastBuilding by 0.001% per spaceBricks
+	-multiplies efficiency of makeBricks by 0.001% per spaceBricks
+	-multiplies efficiency of hitWall by 0.007% per timeBricks
+	-multiplies efficiency of puncher by 0.007% per timeBricks
+	-multiplies efficiency of clubber by 0.007% per timeBricks
+	-multiplies efficiency of swordsman by 0.007% per timeBricks
+	-multiplies efficiency of gunner by 0.007% per timeBricks
+	-multiplies efficiency of grenade by 0.007% per timeBricks
+	-multiplies efficiency of wreckingBall by 0.007% per timeBricks
+	-multiplies efficiency of bulldozer by 0.007% per timeBricks
+	-multiplies efficiency of airstrike by 0.007% per timeBricks
+	-multiplies efficiency of necromancer by 0.007% per timeBricks
+	-multiplies efficiency of giant by 0.007% per timeBricks
+	-multiplies efficiency of demon by 0.007% per timeBricks
+	-multiplies efficiency of compromiser by 0.007% per timeBricks
+	-multiplies efficiency of brickFactory by 0.007% per timeBricks
+	-multiplies efficiency of lastBuilding by 0.007% per timeBricks
+	-multiplies efficiency of makeBricks by 0.007% per timeBricks
+	-named Spacetime Extractors
+	-picture : http://i.imgur.com/6HcIknB.png
+	*specialBrickBonus2
+	-"Everything is <b>0.1%</b> more efficient per <b>End brick</b> and <b>1%</b> per <b>Finality Brick</b>.<br><i>If you're not extracting everything of value from everything, you clearly do not have enough extractors.</i>"
+	-costs 8.8e25 bricks
+	-unlocks at 5 timesActuallyWon, 1 winBricks
+	-multiplies efficiency of hitWall by 0.1% per endBricks
+	-multiplies efficiency of puncher by 0.1% per endBricks
+	-multiplies efficiency of clubber by 0.1% per endBricks
+	-multiplies efficiency of swordsman by 0.1% per endBricks
+	-multiplies efficiency of gunner by 0.1% per endBricks
+	-multiplies efficiency of grenade by 0.1% per endBricks
+	-multiplies efficiency of wreckingBall by 0.1% per endBricks
+	-multiplies efficiency of bulldozer by 0.1% per endBricks
+	-multiplies efficiency of airstrike by 0.1% per endBricks
+	-multiplies efficiency of necromancer by 0.1% per endBricks
+	-multiplies efficiency of giant by 0.1% per endBricks
+	-multiplies efficiency of demon by 0.1% per endBricks
+	-multiplies efficiency of compromiser by 0.1% per endBricks
+	-multiplies efficiency of brickFactory by 0.1% per endBricks
+	-multiplies efficiency of lastBuilding by 0.1% per endBricks
+	-multiplies efficiency of makeBricks by 0.1% per endBricks
+	-multiplies efficiency of hitWall by 1% per finalityBricks
+	-multiplies efficiency of puncher by 1% per finalityBricks
+	-multiplies efficiency of clubber by 1% per finalityBricks
+	-multiplies efficiency of swordsman by 1% per finalityBricks
+	-multiplies efficiency of gunner by 1% per finalityBricks
+	-multiplies efficiency of grenade by 1% per finalityBricks
+	-multiplies efficiency of wreckingBall by 1% per finalityBricks
+	-multiplies efficiency of bulldozer by 1% per finalityBricks
+	-multiplies efficiency of airstrike by 1% per finalityBricks
+	-multiplies efficiency of necromancer by 1% per finalityBricks
+	-multiplies efficiency of giant by 1% per finalityBricks
+	-multiplies efficiency of demon by 1% per finalityBricks
+	-multiplies efficiency of compromiser by 1% per finalityBricks
+	-multiplies efficiency of brickFactory by 1% per finalityBricks
+	-multiplies efficiency of lastBuilding by 1% per finalityBricks
+	-multiplies efficiency of makeBricks by 1% per finalityBricks
+	-named Extreme Extractors
+	-picture : http://i.imgur.com/5aqM5G5.png
+	
+	
+	*endStory
+	-"Everything is <b>5%</b> more efficient.<br><i>In the temple we found The Black, we also found a collection of mysterious scrolls. Maybe we should check those out. The at all readable ones, anyway.</i>"
+	-costs 2 endBricks
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory2
+	-named Scrolls of The End
+	-picture : http://i.imgur.com/oH8QPgZ.png
+	*endStory2
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>Cascada</b><br>"When The End comes we will all feel it, we will know it has arrived. The End </i>will<i> come, as nothing can truly halt The Harbinger.<br> <br>The End is not an end of us, or anything material. It is an end of ignorance, for The End will reveal what - or who - has hid behind the curtain the entire time."</i>"
+	-costs 2 endBricks
+	-requires 1 destroyBonusWall32
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory3
+	-named Scroll B-8
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory3
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>Foreshadowing</b><br>"The previous verse was information not entirely accurate; the curtain seen behind in The End will only explain partially. I will draw the full curtain in the scrolls labelled 'C'."</i>"
+	-costs 2 endBricks
+	-requires 1 destroyBonusWall33
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory4
+	-named Scroll B-9
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory4
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>Infinity & Eternity</b><br>"There are two absolute powers in this universe: The Black, and the Time Bear. The former, a mistake; the latter, a failsafe. Both were never intended to be encountered."</i>"
+	-costs 2 endBricks
+	-requires 1 destroyBonusWall34
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory5
+	-named Scroll A-3
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory5
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>Standing on The Edge</b><br>"When I first saw The Black, I could tell it was not meant to exist, let alone be called upon. I did not understand how such a thing could be controlled, but I did not often understand what The King spoke of."</i>"
+	-costs 2 endBricks
+	-requires 1 destroyBonusWall35
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory6
+	-named Scroll A-4
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory7
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>Closing The Curtain</b><br>"In the 38th, The King made a choice. He declared that The Army never be revealed, but work in shadow; for no one must know the truth."</i>"
+	-costs 3 endBricks
+	-requires 1 destroyBonusWall37
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory8
+	-named Scroll C-4
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory8
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>The Levee</b><br>"The first time I began to question our actions was when I witnessed #5's return from The Edge. Traversing The Edge is cheating reality, you're simply </i>not allowed<i> to do it. But The King does not care about the rules."</i>"
+	-costs 4 endBricks
+	-requires 1 destroyBonusWall38
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-named Scroll C-8
+	-unlocks endStory9
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory9
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>The Long Game</b><br>"In the 44th, The King appointed me Keeper of The Black. He said he found it too much to take care of along with his other duties. Looking back, this move is interesting; he has made no other large mistakes in his long reign."</i>"
+	-costs 4 endBricks
+	-requires 1 destroyBonusWall39
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory10
+	-named Scroll C-37
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory10
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>Framework</b><br>"The End is more of a beginning - of an enlightened age; and a reminder that all things come to an end. But life will not come to an end when the sun burns out; it will end with The Finality."</i>"
+	-costs 4 endBricks
+	-requires 1 destroyBonusWall40
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-unlocks endStory11
+	-named Scroll B-20
+	-picture : http://i.imgur.com/q3LakAy.png
+	*endStory11
+	-"Everything is <b>5%</b> more efficient.<br> <br><i><b>Two Paths</b><br>"I received messages from powers I cannot understand; They spoke of The King, and his wrongs against reality itself. That is why I am writing this. I have betrayed The Army, for what I believe to be the greater good."</i>"
+	-costs 5 endBricks
+	-requires 1 destroyBonusWall41
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-named Scroll A-2
+	-picture : http://i.imgur.com/q3LakAy.png
+	*finalityUnlock
+	-"Unlocks <b>The Finality Scrolls</b>.<br>Everything is <b>10%</b> more efficient.<br><i>"These ones are even more old and dusty." ~Agent Carter<br>"Ooh, that means they're more important!" ~Agent Johnson</i>"
+	-costs 1 finalityBricks
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of brickFactory by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-multiplies efficiency of makeBricks by 110%
+	-unlocks endStory12
+	-named Scrolls of The Finality
+	-picture : http://i.imgur.com/ZDjMvWn.png
+	*endStory12
+	-"Everything is <b>10%</b> more efficient.<br> <br><i><b>The Revelation & The Remedy</b><br>"There is another similarity The Black and the Time Bear have. They both exist because of The King."</i>"
+	-costs 1 finalityBricks
+	-requires 1 destroyBonusWall42
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of brickFactory by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-multiplies efficiency of makeBricks by 110%
+	-unlocks endStory13
+	-named Scroll A-10
+	-picture : http://i.imgur.com/OG0I0gs.png
+	*endStory13
+	-"Everything is <b>10%</b> more efficient.<br> <br><i><b>Balance</b><br>"He caused Infinity, and to prevent reality from being further defiled, They created Eternity.<br> <br>Should these two powers collide, I believe it could very well cause The Finality."</i>"
+	-costs 1 finalityBricks
+	-requires 1 destroyBonusWall43
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of brickFactory by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-multiplies efficiency of makeBricks by 110%
+	-unlocks endStory14
+	-named Scroll A-11
+	-picture : http://i.imgur.com/OG0I0gs.png
+	*endStory14
+	-"Everything is <b>10%</b> more efficient.<br> <br><i><b>The Odyssey</b><br>"I am - or was - #1, the highest ranking member of The Army. I am writing this in the hope that someone will find it and discover the truth, for it is all true, kept secret for time beyond count by The King."</i>"
+	-costs 2 finalityBricks
+	-requires 1 destroyBonusWall44
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of brickFactory by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-multiplies efficiency of makeBricks by 110%
+	-unlocks endStory15
+	-named Scroll A-1
+	-picture : http://i.imgur.com/OG0I0gs.png
+	*endStory15
+	-"Everything is <b>10%</b> more efficient.<br> <br><i><b>Mirrorage</b><br>"I am no longer a member of The Army, the first member to ever leave. I am now simply The Keeper of The Black, for I must keep this infinite power away from The King.<br> <br>The title of this verse may be important to the cause; after writing the previous, I found an Edge message that had materialized on my temple saying only that word."</i>"
+	-costs 2 finalityBricks
+	-requires 1 destroyBonusWall45
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of brickFactory by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-multiplies efficiency of makeBricks by 110%
+	-unlocks endStory16
+	-named Scroll A-50
+	-picture : http://i.imgur.com/OG0I0gs.png
+	*endStory16
+	-"Everything is <b>10%</b> more efficient.<br> <br><i><b>The Legacy</b><br>"In the 42nd, The King created the Walls. He has recreated them for every Incarnation since. I still do not understand their purpose, but if there is one thing I know about The King, it's that he always has a reason."</i>"
+	-costs 2 finalityBricks
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of brickFactory by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-multiplies efficiency of makeBricks by 110%
+	-named Scroll C-32
+	-picture : http://i.imgur.com/OG0I0gs.png
+	*endStory17
+	-"Everything is <b>16%</b> more efficient.<br> <br><i><b>The Infuser</b><br>"The Army has attempted to create more substances with power similar to The Black. One of their attempts resulted in a strange volatile acid of which #21 said had no name, for it was a mistake. I saved the only sample of it in existence, and it is currently in possession of the Wizards. This unnamed substance is much less dangerous than The Black, and could be utilized safely by those outside of The Army."</i>"
+	-costs 7.3e36 money, 7.3e21 fourthwallmatter, 73 endBricks, 9 finalityBricks
+	-unlocks at 1 timesActuallyWon, 1 winBricks
+	-multiplies efficiency of hitWall by 116%
+	-multiplies efficiency of puncher by 116%
+	-multiplies efficiency of clubber by 116%
+	-multiplies efficiency of swordsman by 116%
+	-multiplies efficiency of gunner by 116%
+	-multiplies efficiency of grenade by 116%
+	-multiplies efficiency of wreckingBall by 116%
+	-multiplies efficiency of bulldozer by 116%
+	-multiplies efficiency of airstrike by 116%
+	-multiplies efficiency of necromancer by 116%
+	-multiplies efficiency of giant by 116%
+	-multiplies efficiency of demon by 116%
+	-multiplies efficiency of compromiser by 116%
+	-multiplies efficiency of brickFactory by 116%
+	-multiplies efficiency of lastBuilding by 116%
+	-multiplies efficiency of makeBricks by 116%
+	-named Scroll D-10
+	-picture : http://i.imgur.com/skLNAG0.png
+	*endStory18
+	-"Everything is <b>16%</b> more efficient.<br> <br><i><b>Words of Warning III</b><br>"If there is one member of The Army you must avoid speaking with, it is #17. While the lower numbers wield more power, they are rarely malicious in intent. If you see #17 at all, it may be too late."</i>"
+	-costs 2.6e37 money, 2.6e22 fourthwallmatter, 73 endBricks, 9 finalityBricks
+	-unlocks at 2 timesActuallyWon, 1 winBricks
+	-multiplies efficiency of hitWall by 116%
+	-multiplies efficiency of puncher by 116%
+	-multiplies efficiency of clubber by 116%
+	-multiplies efficiency of swordsman by 116%
+	-multiplies efficiency of gunner by 116%
+	-multiplies efficiency of grenade by 116%
+	-multiplies efficiency of wreckingBall by 116%
+	-multiplies efficiency of bulldozer by 116%
+	-multiplies efficiency of airstrike by 116%
+	-multiplies efficiency of necromancer by 116%
+	-multiplies efficiency of giant by 116%
+	-multiplies efficiency of demon by 116%
+	-multiplies efficiency of compromiser by 116%
+	-multiplies efficiency of brickFactory by 116%
+	-multiplies efficiency of lastBuilding by 116%
+	-multiplies efficiency of makeBricks by 116%
+	-named Scroll A-33
+	-picture : http://i.imgur.com/skLNAG0.png
+	*endStory19
+	-"Everything is <b>16%</b> more efficient.<br> <br><i><b>Method in Madness</b><br>"In an inscrutable move, The King has decided to leave his chess set on the A1 prime planet. Sometimes I feel that his only goal is to confuse everyone."</i>"
+	-costs 7.3e37 money, 7.3e22 fourthwallmatter, 73 endBricks, 9 finalityBricks
+	-unlocks at 3 timesActuallyWon, 1 winBricks
+	-multiplies efficiency of hitWall by 116%
+	-multiplies efficiency of puncher by 116%
+	-multiplies efficiency of clubber by 116%
+	-multiplies efficiency of swordsman by 116%
+	-multiplies efficiency of gunner by 116%
+	-multiplies efficiency of grenade by 116%
+	-multiplies efficiency of wreckingBall by 116%
+	-multiplies efficiency of bulldozer by 116%
+	-multiplies efficiency of airstrike by 116%
+	-multiplies efficiency of necromancer by 116%
+	-multiplies efficiency of giant by 116%
+	-multiplies efficiency of demon by 116%
+	-multiplies efficiency of compromiser by 116%
+	-multiplies efficiency of brickFactory by 116%
+	-multiplies efficiency of lastBuilding by 116%
+	-multiplies efficiency of makeBricks by 116%
+	-named Scroll D-4
+	-picture : http://i.imgur.com/skLNAG0.png
+	*endStory20
+	-"Everything is <b>16%</b> more efficient.<br> <br><i><b>Forbidden Techniques</b><br>"On the subject of how he came to create The Army, The King is entirely silent. I have... A </i>theory<i> of what he may have done, but I am only jumping to conclusions based on the magical power he wields. It is likely that there is a less implausible and absolutely insane way of acquiring such power."</i>"
+	-costs 4.44e38 money, 4.44e23 fourthwallmatter, 73 endBricks, 9 finalityBricks
+	-unlocks at 4 timesActuallyWon, 1 winBricks
+	-multiplies efficiency of hitWall by 116%
+	-multiplies efficiency of puncher by 116%
+	-multiplies efficiency of clubber by 116%
+	-multiplies efficiency of swordsman by 116%
+	-multiplies efficiency of gunner by 116%
+	-multiplies efficiency of grenade by 116%
+	-multiplies efficiency of wreckingBall by 116%
+	-multiplies efficiency of bulldozer by 116%
+	-multiplies efficiency of airstrike by 116%
+	-multiplies efficiency of necromancer by 116%
+	-multiplies efficiency of giant by 116%
+	-multiplies efficiency of demon by 116%
+	-multiplies efficiency of compromiser by 116%
+	-multiplies efficiency of brickFactory by 116%
+	-multiplies efficiency of lastBuilding by 116%
+	-multiplies efficiency of makeBricks by 116%
+	-named Scroll C-2
+	-picture : http://i.imgur.com/skLNAG0.png
+	
+
+	*timeBearWard1
+	-"Everything is <b>5%</b> more efficient.<br><i>The wizards report feeling the power of the Time Bear upon their magic, and tell us not to manipulate time further. They can create wards that may steer the Time Bear in a different direction, making our guys less scared, therefore raising their productivity.</i>"
+	-costs 9876543 fourthWallMatter, 987654321 bricks
+	-unlocks at 30 prestige
+	-unlocks timeBearAchieve
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-named Bronze Time Bear Ward
+	-picture : http://i.imgur.com/DSMRgWX.png
+	*timeBearWard2
+	-"Everything is <b>5%</b> more efficient.<br><i>We asked the wizards what the Time Bear is, and they said "Something that you do not want aware of your presence." That's a little ominous, but not enough to stop us from using everything we have to take down this wall!</i>"
+	-costs 98765432 fourthWallMatter, 9876543210 bricks
+	-unlocks at 125 prestige, 2 resetTimes
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-named Silver Time Bear Ward
+	-picture : http://i.imgur.com/J1ef1UX.png
+	*timeBearWard3
+	-"Everything is <b>5%</b> more efficient.<br><i>We were going to ask the titans what the Time Bear is, but the translator wizards refused to ask them, saying "There are too many old wounds."</i>"
+	-costs 987654321 fourthWallMatter, 98765432101 bricks
+	-unlocks at 250 prestige, 3 resetTimes
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-named Gold Time Bear Ward
+	-picture : http://i.imgur.com/9gTyt89.png
+	*timeBearWard4
+	-"Everything is <b>5%</b> more efficient.<br><i>We asked the demons what the Time Bear is, and the chief demon said "Something you do not want anywhere near you." This sounds strange coming from the guy who has carried around some of the most dangerous things we have ever encountered and trolled people with them.</i>"
+	-costs 9876543210 fourthWallMatter, 987654321012 bricks
+	-unlocks at 400 prestige, 4 resetTimes
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-named Platinum Time Bear Ward
+	-picture : http://i.imgur.com/jmVBmsm.png
+	*timeBearWard5
+	-"Everything is <b>5%</b> more efficient.<br><i>One of our agents went crazy, muttering about seeing the Time Bear. The wizards are saying he may have been tainted and must be executed.</i>"
+	-costs 98765432101 fourthWallMatter, 9876543210123 bricks
+	-unlocks at 750 prestige, 5 resetTimes
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-multiplies efficiency of brickFactory by 105%
+	-multiplies efficiency of makeBricks by 105%
+	-named Ruby Time Bear Ward
+	-picture : http://i.imgur.com/GArKzmU.png
+	*timeBearWard6
+	-"Everything is <b>6%</b> more efficient.<br><i>Found graffiti on the side of RUC headquarters saying "THE TIME BEAR IS COMING". Reports of irrational feelings of fear when looking at it. Requesting termination of the Time Rewinder project. ~Agent Lawrence</i>"
+	-costs 987654321012 fourthWallMatter, 98765432101234 bricks
+	-unlocks at 1250 prestige, 6 resetTimes
+	-multiplies efficiency of hitWall by 106%
+	-multiplies efficiency of puncher by 106%
+	-multiplies efficiency of clubber by 106%
+	-multiplies efficiency of swordsman by 106%
+	-multiplies efficiency of gunner by 106%
+	-multiplies efficiency of grenade by 106%
+	-multiplies efficiency of wreckingBall by 106%
+	-multiplies efficiency of bulldozer by 106%
+	-multiplies efficiency of airstrike by 106%
+	-multiplies efficiency of necromancer by 106%
+	-multiplies efficiency of giant by 106%
+	-multiplies efficiency of demon by 106%
+	-multiplies efficiency of compromiser by 106%
+	-multiplies efficiency of lastBuilding by 106%
+	-multiplies efficiency of brickFactory by 106%
+	-multiplies efficiency of makeBricks by 106%
+	-named Emerald Time Bear Ward
+	-picture : http://i.imgur.com/wY0iwY4.png
+	*timeBearWard7
+	-"Everything is <b>6%</b> more efficient.<br><i>The graffiti is everywhere now. On all of our facilities. It seems to appear overnight, after the cameras strangely go offline. Requesting immediate termination of the Time Rewinder project. ~Chief of Security, RUC</i>"
+	-costs 9876543210123 fourthWallMatter, 987654321012345 bricks
+	-unlocks at 4000 prestige, 7 resetTimes
+	-multiplies efficiency of hitWall by 106%
+	-multiplies efficiency of puncher by 106%
+	-multiplies efficiency of clubber by 106%
+	-multiplies efficiency of swordsman by 106%
+	-multiplies efficiency of gunner by 106%
+	-multiplies efficiency of grenade by 106%
+	-multiplies efficiency of wreckingBall by 106%
+	-multiplies efficiency of bulldozer by 106%
+	-multiplies efficiency of airstrike by 106%
+	-multiplies efficiency of necromancer by 106%
+	-multiplies efficiency of giant by 106%
+	-multiplies efficiency of demon by 106%
+	-multiplies efficiency of compromiser by 106%
+	-multiplies efficiency of lastBuilding by 106%
+	-multiplies efficiency of brickFactory by 106%
+	-multiplies efficiency of makeBricks by 106%
+	-named Sapphire Time Bear Ward
+	-picture : http://i.imgur.com/k4IRYqQ.png
+	*timeBearWard8
+	-"Everything is <b>6%</b> more efficient.<br><i>"dude this is some creepy shit just cut the time crap" ~1337 sn1p3r #73</i>"
+	-costs 98765432101234 fourthWallMatter, 9876543210123456 bricks
+	-unlocks at 15000 prestige, 8 resetTimes
+	-multiplies efficiency of hitWall by 106%
+	-multiplies efficiency of puncher by 106%
+	-multiplies efficiency of clubber by 106%
+	-multiplies efficiency of swordsman by 106%
+	-multiplies efficiency of gunner by 106%
+	-multiplies efficiency of grenade by 106%
+	-multiplies efficiency of wreckingBall by 106%
+	-multiplies efficiency of bulldozer by 106%
+	-multiplies efficiency of airstrike by 106%
+	-multiplies efficiency of necromancer by 106%
+	-multiplies efficiency of giant by 106%
+	-multiplies efficiency of demon by 106%
+	-multiplies efficiency of compromiser by 106%
+	-multiplies efficiency of lastBuilding by 106%
+	-multiplies efficiency of brickFactory by 106%
+	-multiplies efficiency of makeBricks by 106%
+	-named Unobtainium Time Bear Ward
+	-picture : http://i.imgur.com/81XatRf.png
+	*timeBearWard9
+	-"Everything is <b>6%</b> more efficient.<br><i>We asked the wizards if there was any way to fully stop the Time Bear, and they said "You do not attempt to destroy the sun to prevent it from rising."</i>"
+	-costs 987654321012345 fourthWallMatter, 98765432101234567 bricks
+	-unlocks at 40000 prestige, 9 resetTimes
+	-multiplies efficiency of hitWall by 106%
+	-multiplies efficiency of puncher by 106%
+	-multiplies efficiency of clubber by 106%
+	-multiplies efficiency of swordsman by 106%
+	-multiplies efficiency of gunner by 106%
+	-multiplies efficiency of grenade by 106%
+	-multiplies efficiency of wreckingBall by 106%
+	-multiplies efficiency of bulldozer by 106%
+	-multiplies efficiency of airstrike by 106%
+	-multiplies efficiency of necromancer by 106%
+	-multiplies efficiency of giant by 106%
+	-multiplies efficiency of demon by 106%
+	-multiplies efficiency of compromiser by 106%
+	-multiplies efficiency of lastBuilding by 106%
+	-multiplies efficiency of brickFactory by 106%
+	-multiplies efficiency of makeBricks by 106%
+	-named Dark Matter Time Bear Ward
+	-picture : http://i.imgur.com/DyspkwM.png
+	*timeBearWard10
+	-"Everything is <b>6%</b> more efficient.<br><i>We asked the demons if they could stop the Time Bear, and they said "There are things that you do not mess with. With us, there are only two. Our boss, and the Time Bear."</i>"
+	-costs 9876543210123456 fourthWallMatter, 987654321012345678 bricks
+	-unlocks at 150000 prestige, 10 resetTimes
+	-multiplies efficiency of hitWall by 106%
+	-multiplies efficiency of puncher by 106%
+	-multiplies efficiency of clubber by 106%
+	-multiplies efficiency of swordsman by 106%
+	-multiplies efficiency of gunner by 106%
+	-multiplies efficiency of grenade by 106%
+	-multiplies efficiency of wreckingBall by 106%
+	-multiplies efficiency of bulldozer by 106%
+	-multiplies efficiency of airstrike by 106%
+	-multiplies efficiency of necromancer by 106%
+	-multiplies efficiency of giant by 106%
+	-multiplies efficiency of demon by 106%
+	-multiplies efficiency of compromiser by 106%
+	-multiplies efficiency of lastBuilding by 106%
+	-multiplies efficiency of brickFactory by 106%
+	-multiplies efficiency of makeBricks by 106%
+	-named Antimatter Time Bear Ward
+	-picture : http://i.imgur.com/VjKnTjf.png
+	*timeBearWard11
+	-"Everything is <b>6%</b> more efficient.<br><i>The reality compromiser project leader attempted to find the Time Bear in reality code, to remove it. He was found dead two hours later in the seat of a reality compromiser. When inspected for cause of death, it seemed he had died of shock.</i>"
+	-costs 98765432101234567 fourthWallMatter, 9876543210123456789 bricks
+	-unlocks at 400000 prestige, 11 resetTimes
+	-multiplies efficiency of hitWall by 106%
+	-multiplies efficiency of puncher by 106%
+	-multiplies efficiency of clubber by 106%
+	-multiplies efficiency of swordsman by 106%
+	-multiplies efficiency of gunner by 106%
+	-multiplies efficiency of grenade by 106%
+	-multiplies efficiency of wreckingBall by 106%
+	-multiplies efficiency of bulldozer by 106%
+	-multiplies efficiency of airstrike by 106%
+	-multiplies efficiency of necromancer by 106%
+	-multiplies efficiency of giant by 106%
+	-multiplies efficiency of demon by 106%
+	-multiplies efficiency of compromiser by 106%
+	-multiplies efficiency of lastBuilding by 106%
+	-multiplies efficiency of brickFactory by 106%
+	-multiplies efficiency of makeBricks by 106%
+	-named Rainbow Time Bear Ward
+	-picture : http://i.imgur.com/yZXIZw9.png
+	*timeBearWard12
+	-"Everything is <b>7%</b> more efficient.<br><i>"This is the last ward the wizards can make. I do not know where we should go from this. I am going to remove myself from anywhere that could be associated with time travel. This is a farewell message. The Time Bear is coming."<br>~CEO, RUC</i>"
+	-costs 9876543210123456789 fourthWallMatter, 987654321012345678900 bricks
+	-unlocks at 1500000 prestige, 11 resetTimes
+	-unlocks timeBearAchieve2
+	-multiplies efficiency of hitWall by 107%
+	-multiplies efficiency of puncher by 107%
+	-multiplies efficiency of clubber by 107%
+	-multiplies efficiency of swordsman by 107%
+	-multiplies efficiency of gunner by 107%
+	-multiplies efficiency of grenade by 107%
+	-multiplies efficiency of wreckingBall by 107%
+	-multiplies efficiency of bulldozer by 107%
+	-multiplies efficiency of airstrike by 107%
+	-multiplies efficiency of necromancer by 107%
+	-multiplies efficiency of giant by 107%
+	-multiplies efficiency of demon by 107%
+	-multiplies efficiency of compromiser by 107%
+	-multiplies efficiency of lastBuilding by 107%
+	-multiplies efficiency of brickFactory by 107%
+	-multiplies efficiency of makeBricks by 107%
+	-named Final Time Bear Ward
+	-picture : http://i.imgur.com/pBrcGq5.png
+	*timeBearWard13
+	-"Everything is <b>8%</b> more efficient.<br><i>There is one thing that does not fear the Time Bear: The Black. The most evil substance known to anyone may be our only hope.</i>"
+	-costs 987654321012345678900 fourthWallMatter, 98765432101234567890000 bricks
+	-unlocks at 4000000 prestige, 12 resetTimes
+	-multiplies efficiency of hitWall by 108%
+	-multiplies efficiency of puncher by 108%
+	-multiplies efficiency of clubber by 108%
+	-multiplies efficiency of swordsman by 108%
+	-multiplies efficiency of gunner by 108%
+	-multiplies efficiency of grenade by 108%
+	-multiplies efficiency of wreckingBall by 108%
+	-multiplies efficiency of bulldozer by 108%
+	-multiplies efficiency of airstrike by 108%
+	-multiplies efficiency of necromancer by 108%
+	-multiplies efficiency of giant by 108%
+	-multiplies efficiency of demon by 108%
+	-multiplies efficiency of compromiser by 108%
+	-multiplies efficiency of lastBuilding by 108%
+	-multiplies efficiency of brickFactory by 108%
+	-multiplies efficiency of makeBricks by 108%
+	-named Black Time Bear Ward
+	-picture : http://i.imgur.com/NXncdYY.png
+	*timeBearWard14
+	-"Everything is <b>11%</b> more efficient.<br><i>Whoever these guys were or are, they have supposedly come close to the Time Bear and survived. Perhaps their artifacts could help us.</i>"
+	-costs 98765432101234567890000 fourthWallMatter, 9876543210123456789000000 bricks
+	-unlocks at 9000000 prestige, 13 resetTimes
+	-multiplies efficiency of hitWall by 111%
+	-multiplies efficiency of puncher by 111%
+	-multiplies efficiency of clubber by 111%
+	-multiplies efficiency of swordsman by 111%
+	-multiplies efficiency of gunner by 111%
+	-multiplies efficiency of grenade by 111%
+	-multiplies efficiency of wreckingBall by 111%
+	-multiplies efficiency of bulldozer by 111%
+	-multiplies efficiency of airstrike by 111%
+	-multiplies efficiency of necromancer by 111%
+	-multiplies efficiency of giant by 111%
+	-multiplies efficiency of demon by 111%
+	-multiplies efficiency of compromiser by 111%
+	-multiplies efficiency of lastBuilding by 111%
+	-multiplies efficiency of brickFactory by 111%
+	-multiplies efficiency of makeBricks by 111%
+	-named Army Time Bear Ward
+	-picture : http://i.imgur.com/zZ9wpYI.png
+
+	*wallMultiplier
+	-"Everything is <b>5%</b> more efficient for each wall you've destroyed.<br><i>Let's compile our knowledge of wall destroying in a book so we can learn from our past mistakes.<br>CEO EDIT: the RUC does not make mistakes.</i>"
+	-costs 250000000000 money
+	-multiplies efficiency of hitWall by 5% per wallsDestroyed
+	-multiplies efficiency of puncher by 5% per wallsDestroyed
+	-multiplies efficiency of clubber by 5% per wallsDestroyed
+	-multiplies efficiency of swordsman by 5% per wallsDestroyed
+	-multiplies efficiency of gunner by 5% per wallsDestroyed
+	-multiplies efficiency of grenade by 5% per wallsDestroyed
+	-multiplies efficiency of wreckingBall by 5% per wallsDestroyed
+	-multiplies efficiency of bulldozer by 5% per wallsDestroyed
+	-multiplies efficiency of airstrike by 5% per wallsDestroyed
+	-multiplies efficiency of necromancer by 5% per wallsDestroyed
+	-multiplies efficiency of giant by 5% per wallsDestroyed
+	-multiplies efficiency of demon by 5% per wallsDestroyed
+	-multiplies efficiency of compromiser by 5% per wallsDestroyed
+	-multiplies efficiency of lastBuilding by 5% per wallsDestroyed
+	-multiplies efficiency of makeBricks by 5% per wallsDestroyed
+	-multiplies efficiency of brickFactory by 5% per wallsDestroyed
+	-named The Chronicle
+	-picture : http://i.imgur.com/zqNeRti.png
+	
+	*productionMultiplier1
+	-"Everything does <b>5%</b> more damage.<br><i>To destroy the big wall, we may need to actually train our guys.</i>"
+	-costs 200000000000 money
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-named Training
+	-picture : http://i.imgur.com/93tCmIj.png
+	*productionMultiplier2
+	-"Everything does <b>5%</b> more damage.<br><i>We need to teach our guys all the tips & tricks of wall destroying.</i>"
+	-costs 20000000000000 money
+	-multiplies efficiency of hitWall by 105%
+	-multiplies efficiency of puncher by 105%
+	-multiplies efficiency of clubber by 105%
+	-multiplies efficiency of swordsman by 105%
+	-multiplies efficiency of gunner by 105%
+	-multiplies efficiency of grenade by 105%
+	-multiplies efficiency of wreckingBall by 105%
+	-multiplies efficiency of bulldozer by 105%
+	-multiplies efficiency of airstrike by 105%
+	-multiplies efficiency of necromancer by 105%
+	-multiplies efficiency of giant by 105%
+	-multiplies efficiency of demon by 105%
+	-multiplies efficiency of compromiser by 105%
+	-multiplies efficiency of lastBuilding by 105%
+	-named Wall-Destroying Classes
+	-picture : http://i.imgur.com/F4FwhJe.png
+	*productionMultiplier3
+	-"Everything does <b>10%</b> more damage.<br><i>Get PUMPED!</i>"
+	-costs 2000000000000000 money
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-named Intense Training
+	-picture : http://i.imgur.com/tHUohS4.png
+	*productionMultiplier4
+	-"Everything does <b>10%</b> more damage.<br><i>Now they know that there's no harm that can come to them unless you sell them.</i>"
+	-costs 200000000000000000 money
+	-multiplies efficiency of hitWall by 110%
+	-multiplies efficiency of puncher by 110%
+	-multiplies efficiency of clubber by 110%
+	-multiplies efficiency of swordsman by 110%
+	-multiplies efficiency of gunner by 110%
+	-multiplies efficiency of grenade by 110%
+	-multiplies efficiency of wreckingBall by 110%
+	-multiplies efficiency of bulldozer by 110%
+	-multiplies efficiency of airstrike by 110%
+	-multiplies efficiency of necromancer by 110%
+	-multiplies efficiency of giant by 110%
+	-multiplies efficiency of demon by 110%
+	-multiplies efficiency of compromiser by 110%
+	-multiplies efficiency of lastBuilding by 110%
+	-named Plot Armor
+	-picture : http://i.imgur.com/CSzNF0J.png
+	*productionMultiplier5
+	-"Everything does <b>25%</b> more damage.<br>Brick production <b>+20%</b>.<br><i>We have won over the walls. They will never again take over our world!</i>"
+	-costs 20000000000000000000 money
+	-unlocks at 5 wallsDestroyed
+	-multiplies efficiency of brickFactory by 120%
+	-multiplies efficiency of makeBricks by 120%
+	-multiplies efficiency of hitWall by 125%
+	-multiplies efficiency of puncher by 125%
+	-multiplies efficiency of clubber by 125%
+	-multiplies efficiency of swordsman by 125%
+	-multiplies efficiency of gunner by 125%
+	-multiplies efficiency of grenade by 125%
+	-multiplies efficiency of wreckingBall by 125%
+	-multiplies efficiency of bulldozer by 125%
+	-multiplies efficiency of airstrike by 125%
+	-multiplies efficiency of necromancer by 125%
+	-multiplies efficiency of giant by 125%
+	-multiplies efficiency of demon by 125%
+	-multiplies efficiency of compromiser by 125%
+	-multiplies efficiency of lastBuilding by 125%
+	-named Victory Dance
+	-picture : http://i.imgur.com/piFqUdL.png
+	*productionMultiplierMagic
+	-"Everything is <b>20%</b> more efficient.<br><i>"Yeah." ~The MEE proposal </i>"
+	-costs 1000000000000000000000 money
+	-multiplies efficiency of brickFactory by 120%
+	-multiplies efficiency of makeBricks by 120%
+	-multiplies efficiency of hitWall by 120%
+	-multiplies efficiency of puncher by 120%
+	-multiplies efficiency of clubber by 120%
+	-multiplies efficiency of swordsman by 120%
+	-multiplies efficiency of gunner by 120%
+	-multiplies efficiency of grenade by 120%
+	-multiplies efficiency of wreckingBall by 120%
+	-multiplies efficiency of bulldozer by 120%
+	-multiplies efficiency of airstrike by 120%
+	-multiplies efficiency of necromancer by 120%
+	-multiplies efficiency of giant by 120%
+	-multiplies efficiency of demon by 120%
+	-multiplies efficiency of compromiser by 120%
+	-multiplies efficiency of lastBuilding by 120%
+	-named Magically Enhanced Everything
+	-picture : http://i.imgur.com/aaFiNNp.png
