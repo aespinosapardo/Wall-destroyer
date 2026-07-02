@@ -14,7 +14,7 @@ Settings :
 	-upgrades are hidden by default
 	-achievements are hidden by default
 	-show log
-	-custom stylesheet : http://pastebin.com/raw.php?i=SmpN3DnR
+	-custom stylesheet : https://raw.githubusercontent.com/aespinosapardo/Wall-destroyer/main/walldestroyer.css
 	-text color : black
 	-fonts : Kavoon
 	-boxes : main (resources, clickables); stats (achievements); store (upgrades, buildings)
